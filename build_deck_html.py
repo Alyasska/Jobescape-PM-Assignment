@@ -619,16 +619,13 @@ def _(i, n):
 def _(i, n):
     return (kicker("Part C · Task 4 — the prototype")
             + col(h("The loop, built.")
-                  + points([("The hook", "the Challenge is what greets you"),
-                            ("The grind", "the plan — open, no gate"),
+                  + points([("The hook", "the Challenge greets you · gated, daily"),
+                            ("The grind", "the plan · open, no gate"),
                             ("The missing arrow", "day ends → you land on the plan")])
                   + lede('<span class="mono-link acc">alyasska.github.io/'
                          'Nomad_Venture_Studio_TA_C4</span>'), "1/5")
-            + col(picture("proto-phone-gate.png", 560, height=680), "6/9")
-            + col(points([("1 · Enter", "the Challenge, served on arrival"),
-                          ("2 · Day 4", "checks you cannot skip past"),
-                          ("3 · Hand-off", "tomorrow locked → go to your plan"),
-                          ("4 · Plan", "the track with no gate")]), "10/13"))
+            + col(picture("proto-challenge.png", 1300,
+                          cap="THE CHALLENGE, SERVED ON ARRIVAL — DAY 5 IS LOCKED"), "6/13"))
 
 
 # ════════════════════════════════════════════ PART D
