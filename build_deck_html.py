@@ -516,9 +516,10 @@ def _(i, n):
 
 @slide("C1 · Is it causal", "chart")
 def _(i, n):
-    left = (h("“Didn't take it” = never offered it.")
-            + points([("Fair control", "reached it · declined it"),
-                      ("Joined, never opened", "retains like completing all 8")])
+    left = (h("Same screen. Same result.")
+            + points([("The 8,845", "mostly never saw the feature — not a control"),
+                      ("The fair test", "takers vs people who saw it and declined"),
+                      ("Read the bars", "top three are level · the cliff is the bottom one")])
             + '<div class="inline-hero"><div class="figure sm acc">+0.5</div>'
               '<p class="figcap">PERCENTAGE POINTS · p = 0.82'
               + ref("Exposure-matched control · z = +0.22", "analysis/02_main.py §4 Test A")
@@ -600,15 +601,15 @@ def _(i, n):
 @slide("C3 · The plan", "table")
 def _(i, n):
     return (kicker("Part C · Task 3 — what's next")
-            + col(h("Cheapest primary-metric fix first.")
+            + col(h('It isn’t unappealing. It’s <span class="acc">hidden.</span>')
                   + table(["Phase", "Ships", "Metric it moves"], [
-                      ["0 · Instrument", "10–20% hold-out", "Makes “which initiative wins” answerable"],
+                      ["0 · Placement", "Default path, 80% · 20% hold-out", "Fixes the biggest loss AND creates the control"],
                       ["1 · First 10 min", "Why 45% get nothing · guaranteed win", "Unsub % 12h/24h — primary"],
-                      ["2 · Mechanic", "Day gate · wire the existing reminder", "Rebill 0→1 — primary"],
-                      ["3 · Quality", "Mine 3,601 exit-reason events", "CSAT, session depth — secondary"],
-                      ["4 · Reach", "Default path · retire the popup", "Multiplies phases 1–3"],
-                  ], accent_row=1, accent_cell=(1, 0)), "1/13")
-            + col(points([("Re-ordered", "after the PM conversation — first-10-min hits a primary metric"),
+                      ["2 · Mechanic", "Harden the soft gate · wire the reminder", "Rebill 0→1 — primary"],
+                      ["3 · Hand-off", "End the day inside the personal plan", "D3, D7 — day 8 is a cliff"],
+                      ["4 · Quality", "Mine 3,601 exit-reason events", "CSAT — guardrail 3.45"],
+                  ], accent_row=0), "1/13")
+            + col(points([("Why placement first", "94.6% of people shown it clicked · 68.5% were never shown it"),
                           ("Kill rule", "hold-out ships · no lift · kill it"
                            + ref("v2 plan, phases and kill rule",
                                  "part-c-release-verdict/03-whats-next.md"))]), "1/13"))
