@@ -198,7 +198,7 @@ td code, th code { font-size:7.1pt; word-break:keep-all; overflow-wrap:normal }
 <p><strong>But fear only closes the sale.</strong> Habit and relevance are what retain, and self-paced learning is a churn minefield — MOOC completion runs 5–15%, and the drop-off is motivational rather than cognitive. A product built on this funnel has to convert fear into habit quickly, or it inherits that churn.</p>
 <p><strong>The buyer is a decade older than the internal read.</strong> Around 60% of paying subscribers are 45+, and the largest single group is men aged 55+ — 21.3% of all buyers. Churn falls steadily with age: 31.1% at 18–24 against 9.5% at 45–54. The oldest buyers are the best buyers. That makes streak-and-badge mechanics a design aimed at the least valuable 9% of the book.</p>
 <p><strong>The Challenge was the right instinct, wrongly built.</strong> Measured across 9,956 paying subscribers: 89% never start it. Among those who do, the target metric doesn't move. Takers retain at 60.0% on D1 against <strong>59.6% for people who reached the same screen and walked away</strong> — a gap of +0.5 points, p = 0.82.</p>
-<p>The reason is mechanical. The hypothesis was "one day = one skill builds a daily habit," but nothing gates the content to one day, so <strong>27% of finishers completed the whole "7-day" challenge in a single sitting.</strong> Version one didn't fail its hypothesis. It never tested it.</p>
+<p>The reason is mechanical. The hypothesis was "one day = one skill builds a daily habit," but the gate is a dismissible warning rather than a lock — so <strong>27% of finishers completed the whole "7-day" challenge in a single sitting.</strong> Version one didn't fail its hypothesis. It never tested it.</p>
 <p><strong>The content is free elsewhere, and the funnel is already cloned.</strong> Structural twins run the identical playbook — Coursiv, and Iro AI which is a literal "Duolingo for AI" — while ChatGPT, YouTube and newsletters give the material away. Defensibility has to come from scaffolding, feedback and accountability: the AI tutor as a practice surface, which is the one thing free substitutes cannot provide.</p>
 <p><strong>The acute risk is billing, not content.</strong> Ratings are strong — 4.7 on the App Store, 4.5 across ~8,000 Trustpilot reviews — yet complaints cluster on surprise charges and refunds gated on course completion. In this cohort, <strong>11.3% of all cancellations are payment failures, chargebacks or disputes.</strong> The FTC sued a peer quiz-funnel studio, Genesis, over this exact model in June 2026. The high rating hides the exposure.</p>
 <p>One correction worth flagging, because it cuts against the reviews: cancellation itself is <strong>self-serve</strong>. The event log records 1,358 uses of the Manage Subscription flow. The trap is the refund, not the cancel button.</p>
@@ -223,7 +223,7 @@ td code, th code { font-size:7.1pt; word-break:keep-all; overflow-wrap:normal }
 </tr>
 </tbody>
 </table>
-<p>The A/B plan-upgrade test breaks even at a <strong>4.9% take-rate</strong> — 8.3% under the conservative horizon. Both are low bars, and the only thing at risk is the $3.60 second upsell it replaces. Recommend running it.</p>
+<p>The A/B plan-upgrade test breaks even at an <strong>8.3% take-rate</strong>, measuring both arms over the same year. A low bar, and the only thing at risk is the $3.60 second upsell it replaces. Recommend running it.</p>
 <h2 id="what-is-measured-and-what-is-inferred">What is measured, and what is inferred</h2>
 <p><strong>Measured from source data.</strong> All of Part C, from BigQuery across 9,956 paying subscribers. Part A's segments, from k-modes clustering over 38,071 quiz respondents. Part D, from a model built over the supplied plan table and cross-checked against the observed plan mix. Every published figure in Parts C and D is re-derived from the raw exports by a verification script — 91 assertions, all passing.</p>
 <p><strong>Inferred from public evidence.</strong> Part B's competitor teardowns, and the expectation-versus-reality gap in Part A — sourced from public reviews plus my own walkthrough as a paying customer.</p>
@@ -695,47 +695,46 @@ start one, and nothing sends them there.</p>
 <h2 id="d2-ab-plan-upgrade-break-even">D.2 — A/B plan-upgrade break-even</h2>
 <p><strong>Setup.</strong> Test group: the 4-week buyer is shown a <strong>Plan Upgrade to 12-week</strong> ($49.99 one-time) instead of the second upsell; a buyer is billed under 12-week economics thereafter.</p>
 <p>Intro and first upsell are identical in both arms (they cancel), and the 12% fee is uniform (cancels too), so break-even is clean:</p>
-<pre><code>p* = E[2nd upsell replaced] / (UpgradePrice + RecRev₁₂ − RecRev₄)
-   = 3.60 / (49.99 + 119.67 − 95.98) = 3.60 / 73.68 = 4.88%
+<pre><code>Both arms must be measured over the SAME year. A 12-week plan billed 12 times spans
+156 weeks; a 4-week plan billed 12 times spans exactly 52. Inside one year the
+12-week plan bills 4 times.
+
+p* = E[2nd upsell] / (Upgrade + RecRev12(1yr) − RecRev4(1yr))
+   = 3.60 / (49.99 + 89.43 − 95.98) = 3.60 / 43.44 = 8.29%
 </code></pre>
-<p>Each upgrade <strong>adds ~$73.68</strong> (the $49.99 surcharge + the richer 12-week recurring stream) and <strong>cannibalises only $3.60</strong> (the expected second upsell).</p>
+<p>Inside one year the recurring delta is <strong>negative</strong> (−$6.55): a 12-week subscriber bills four times against the 4-week plan's twelve. So the upgrade is a <strong>cash-forward trade</strong> — $49.99 today against slightly less recurring this year, for a subscriber on a lower-churn plan. It cannibalises <strong>$3.60</strong>.</p>
 <table>
 <thead>
 <tr>
 <th>Upgrade take-rate</th>
 <th>Test net LTV / 4-wk buyer</th>
-<th>Lift vs control ($123.70)</th>
+<th>vs control ($123.70)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>0% (control)</td>
+<td>0%</td>
+<td>$120.53</td>
+<td>−$3.17 — the cost of the swap if nobody upgrades</td>
+</tr>
+<tr>
+<td>8.3%</td>
 <td>$123.70</td>
-<td>—</td>
+<td>break-even</td>
 </tr>
 <tr>
-<td>5%</td>
-<td>$123.77</td>
-<td>+0.1%</td>
-</tr>
-<tr>
-<td>10%</td>
-<td>$127.02</td>
-<td>+2.7%</td>
-</tr>
-<tr>
-<td>20%</td>
-<td>$133.50</td>
-<td>+7.9%</td>
+<td>15%</td>
+<td>$126.27</td>
+<td>+2.1%</td>
 </tr>
 <tr>
 <td>30%</td>
-<td>$139.98</td>
-<td>+13.2%</td>
+<td>$132.00</td>
+<td>+6.7%</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Break-even ≈ 4.9%</strong> (primary) to <strong>≈ 8.3%</strong> under the conservative 52-week horizon.</p>
+<p><strong>Break-even ≈ 8.3%</strong> on a like-for-like one-year horizon.</p>
 <p><strong>Recommendation: run the test.</strong> The downside is tiny and bounded (the $3.60 second upsell, test arm only); the upside is a permanent shift toward the highest-LTV plan. But because break-even is so low, the spreadsheet isn't the real question — the <strong>live test must watch second-order effects the point-model ignores:</strong> (a) does inserting an upgrade step depress overall checkout completion or first-upsell take? (b) do upgraded users <strong>churn/refund faster</strong> because they were pushed into a bigger commitment? Track early-period retention and refunds on upgraded cohorts, not just the Day-0 take-rate.</p>
 <h1 id="the-economics-thesis-why-retention-is-the-moat">The economics thesis (why retention is the moat)</h1>
 <p>This bridges Parts A, C, and D: it takes the per-plan LTV (Part D) up to the whole business, then shows <em>why</em> the Challenge (Part C) is an economic instrument, not just a UX feature.</p>

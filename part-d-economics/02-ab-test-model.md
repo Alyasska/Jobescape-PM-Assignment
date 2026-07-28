@@ -2,7 +2,7 @@
 
 **Question:** In the test group, a **4-week** subscriber is shown a **Plan Upgrade to 12-week** ($49.99 one-time) **instead of the second upsell**. An upgrade buyer is billed under 12-week economics from then on. At what upgrade-conversion does the test beat control, and should we run it?
 
-**Answer up front:** Break-even upgrade conversion is **≈ 4.9%** (primary model) to **≈ 8.3%** (conservative horizon). Both are low and realistic for a checkout upgrade offer → **yes, run the test.**
+**Answer up front:** Break-even upgrade conversion is **≈ 8.3%** on a like-for-like one-year horizon. A low bar for a checkout offer → **yes, run the test.** (Applying all 12 supplied transitions to both plans gives 4.9%, but that reading is not like-for-like — see below.)
 
 ---
 
@@ -29,33 +29,48 @@ p* = 3.60 / (49.99 + RecRev₁₂ − RecRev₄)
 
 Each upgrade **adds** the $49.99 surcharge plus the *difference* between a 12-week and a 4-week recurring stream, and **cannibalises** only the $3.60 expected second upsell.
 
-## Primary model (full 12-period curve)
+## Why the horizon has to match
 
-- Recurring revenue, 4-week stream = **$95.98**
-- Recurring revenue, 12-week stream = **$119.67** (Δ = **+$23.69**)
-- Each upgrade adds 49.99 + 23.69 = **$73.68**, cannibalises **$3.60**
-- **Break-even p\*** = 3.60 / 73.68 = **4.88%**
+The two plans bill at different rhythms, so "12 transitions" means different amounts of *time*:
 
-| Upgrade take-rate | Test net LTV (per 4-wk buyer) | Lift vs control ($123.70) |
+| | charges | first → last charge | calendar span |
+|---|---|---|---|
+| 4-week plan, 12 recurring | 12 | week 4 → week 52 | **exactly one year** |
+| 12-week plan, 12 recurring | 12 | week 12 → week 156 | **three years** |
+
+So applying the full curve to both arms hands the test group **156 weeks of revenue and the control
+52**. That is not a like-for-like comparison, and it is the same mistake Part C is about: two groups
+measured on different clocks. Within one year the 12-week plan bills **four** times, not twelve.
+
+| Reading | 4-wk recurring | 12-wk recurring | Δ | Gain/upgrade | **Break-even** |
+|---|---|---|---|---|---|
+| Full curve (unequal horizons) | $95.98 | $119.67 | +$23.69 | $73.68 | 4.88% |
+| **One year, both arms** | **$95.98** | **$89.43** | **−$6.55** | **$43.44** | **8.29%** |
+
+**The honest number is 8.29%.**
+
+Test-arm net LTV per 4-week buyer, on the one-year horizon (control = $123.70):
+
+| Upgrade take-rate | Test net LTV | vs control |
 |---|---|---|
-| 0% (control) | $123.70 | — |
-| 5% | $123.77 | +0.1% |
-| 10% | $127.02 | +2.7% |
-| 20% | $133.50 | +7.9% |
-| 30% | $139.98 | +13.2% |
+| 0% | $120.53 | −$3.17 — the cost of the swap if nobody upgrades |
+| 8.3% | $123.70 | break-even |
+| 15% | $126.27 | +2.1% |
+| 30% | $132.00 | +6.7% |
 
-## Conservative model (strict 52-week horizon)
+## What the corrected number actually means
 
-If the 12-week recurring stream is capped at payments charged inside one calendar year (4 periods — weeks 12/24/36/48 — $89.43), an upgrade slightly *shortens* the modelled recurring window, so the surcharge does more of the work:
+Inside one year the recurring delta is **negative** (−$6.55): a 12-week subscriber bills four times
+against the 4-week plan's twelve. So the upgrade is **not** "a richer recurring stream" — it is a
+**cash-forward trade**. You collect $49.99 today and give up a little recurring revenue this year,
+in exchange for a subscriber on a plan that churns less and is worth more beyond the horizon.
 
-- Each upgrade adds 49.99 + (89.43 − 95.98) = **$43.44**, cannibalises $3.60
-- **Break-even p\*** = 3.60 / 43.44 = **8.28%**
-
-Even here the test turns positive by ~8% take-rate and reaches +6.7% lift at 30%.
+That reframing matters for how you read the test: judge it on **cash collected and retention**, not
+on first-year recurring revenue, which the upgrade slightly reduces by construction.
 
 ## Recommendation
 
-**Run the test.** The downside is tiny and bounded: the only thing at risk is the $3.60 expected second upsell per 4-week buyer, and only for the test arm. The upside is a permanent **mix shift toward the highest-LTV plan** ($162 vs $124 net). Break-even sits at **~5–8%** upgrade conversion — well within what checkout upgrade/one-click-upsell offers typically achieve.
+**Run the test.** The downside is tiny and bounded: the only thing at risk is the $3.60 expected second upsell per 4-week buyer, and only for the test arm. The upside is a permanent **mix shift toward the highest-LTV plan** ($162 vs $124 net). Break-even sits at **~8%** upgrade conversion on a like-for-like horizon — well within what checkout upgrade offers typically achieve.
 
 **How I'd run it & de-risk:**
 1. Size the test for the target metric = **upgrade take-rate**, with net-LTV-per-4-week-buyer as the readout. Need enough 4-week buyers to detect a ~5% take-rate with confidence.

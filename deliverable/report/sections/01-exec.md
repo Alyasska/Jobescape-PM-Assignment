@@ -18,7 +18,7 @@ The measured fact underneath it: **50.2% of paying subscribers never complete a 
 
 **The Challenge was the right instinct, wrongly built.** Measured across 9,956 paying subscribers: 89% never start it. Among those who do, the target metric doesn't move. Takers retain at 60.0% on D1 against **59.6% for people who reached the same screen and walked away** — a gap of +0.5 points, p = 0.82.
 
-The reason is mechanical. The hypothesis was "one day = one skill builds a daily habit," but nothing gates the content to one day, so **27% of finishers completed the whole "7-day" challenge in a single sitting.** Version one didn't fail its hypothesis. It never tested it.
+The reason is mechanical. The hypothesis was "one day = one skill builds a daily habit," but the gate is a dismissible warning rather than a lock — so **27% of finishers completed the whole "7-day" challenge in a single sitting.** Version one didn't fail its hypothesis. It never tested it.
 
 **The content is free elsewhere, and the funnel is already cloned.** Structural twins run the identical playbook — Coursiv, and Iro AI which is a literal "Duolingo for AI" — while ChatGPT, YouTube and newsletters give the material away. Defensibility has to come from scaffolding, feedback and accountability: the AI tutor as a practice surface, which is the one thing free substitutes cannot provide.
 
@@ -32,7 +32,7 @@ One correction worth flagging, because it cuts against the reviews: cancellation
 |---|---|---|---|---|
 | Net LTV, one-year horizon, 12% fee | $60.42 | $123.70 | $162.15 | **$125.06** |
 
-The A/B plan-upgrade test breaks even at a **4.9% take-rate** — 8.3% under the conservative horizon. Both are low bars, and the only thing at risk is the $3.60 second upsell it replaces. Recommend running it.
+The A/B plan-upgrade test breaks even at an **8.3% take-rate**, measuring both arms over the same year. A low bar, and the only thing at risk is the $3.60 second upsell it replaces. Recommend running it.
 
 ## What is measured, and what is inferred
 

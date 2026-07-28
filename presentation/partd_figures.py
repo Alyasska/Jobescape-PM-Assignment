@@ -93,7 +93,7 @@ def breakeven(w=700, h=250):
     o.append(f'<line x1="{L}" y1="{yc:.1f}" x2="{w-R}" y2="{yc:.1f}" stroke="{INK}" '
              f'stroke-width="1.6" stroke-dasharray="5 4"/>')
     o.append(_t(w - R, yc - 7, "control $123.70", 11, INK, "end"))
-    for label, gain, dash in (("full-curve", 73.68, None), ("strict 52-wk", 43.44, "6 3")):
+    for label, gain, dash in (("one year, like-for-like", 43.44, None), ("full curve — unequal horizons", 73.68, "6 3")):
         pts = []
         for i in range(41):
             p = i / 100.0
@@ -102,7 +102,7 @@ def breakeven(w=700, h=250):
         d = f' stroke-dasharray="{dash}"' if dash else ""
         o.append(f'<polyline points="{" ".join(pts)}" fill="none" stroke="{ACCENT}" '
                  f'stroke-width="2.2"{d}/>')
-    for p, txt in ((0.0488, "4.9%"), (0.0828, "8.3%")):
+    for p, txt in ((0.0829, "8.3%"), (0.0488, "4.9%")):
         x = L + pw * p / 0.40
         o.append(f'<line x1="{x:.1f}" y1="{T}" x2="{x:.1f}" y2="{T+ph}" stroke="{ACCENT}" '
                  f'stroke-width="1" stroke-dasharray="2 3"/>')

@@ -657,16 +657,15 @@ def _(i, n):
 @slide("D2 · The A/B test", "chart")
 def _(i, n):
     return (kicker("Part D · Task 2 — the plan-upgrade A/B model")
-            + col(h("Break-even 4.9%. Run it.")
-                  + points([("Each upgrade", "+$49.99 + $23.69 recurring = $73.68"),
-                            ("Cannibalises", "$3.60 second upsell"),
-                            ("p*", "3.60 ÷ 73.68 = 4.88%"),
-                            ("Conservative", "8.28% on the 52-week horizon"),
-                            ("At risk", "$3.60 per test-arm buyer")]), "1/5")
+            + col(h("Break-even 8.3%. Run it.")
+                  + points([("Same year, both arms", "12-wk bills 4× in a year, not 12×"),
+                            ("Each upgrade", "+$49.99 − $6.55 recurring = $43.44"),
+                            ("p*", "3.60 ÷ 43.44 = 8.29%"),
+                            ("Cannibalises", "$3.60 second upsell — the whole downside")]), "1/5")
             + col(f'<p class="charttitle">TEST-GROUP NET LTV PER 4-WEEK BUYER · CONTROL $123.70 · '
                   f'AXIS FROM $120{ref("A/B break-even model", "part-d-economics/02-ab-test-model.md")}</p>'
-                  + linechart([123.70, 123.77, 127.02, 133.50, 139.98],
-                              ["0%", "5%", "10%", "20%", "30%"], hgt=280, ymin=120, ymax=142,
+                  + linechart([120.53, 123.70, 126.27, 132.00],
+                              ["0%", "8.3%", "15%", "30%"], hgt=280, ymin=119, ymax=134,
                               accent_last=True, fmt=lambda v: f"${v:,.2f}"), "6/13"))
 
 
@@ -702,7 +701,7 @@ def _(i, n):
                  ("C3", "Rebuild the mechanic · instrument first · reach last"),
                  ("C4", "Working prototype of the daily gate · pre-registered bar · kill rule"),
                  ("D1", "Net LTV $60 / $124 / $162 · blended $125.06 · validated on real mix"),
-                 ("D2", "Break-even 4.9% · run it · downside bounded to $3.60 per buyer")]:
+                 ("D2", "Break-even 8.3% like-for-like · run it · downside bounded to $3.60")]:
         ix += (f'<div class="ix"><span class="ixc{" acc" if c == "C2" else ""}">{c}</span>'
                f'<span class="ixt">{e(s)}</span></div>')
     ix += "</div>"

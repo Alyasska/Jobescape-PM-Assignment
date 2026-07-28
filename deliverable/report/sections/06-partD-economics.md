@@ -28,20 +28,23 @@
 Intro and first upsell are identical in both arms (they cancel), and the 12% fee is uniform (cancels too), so break-even is clean:
 
 ```
-p* = E[2nd upsell replaced] / (UpgradePrice + RecRev₁₂ − RecRev₄)
-   = 3.60 / (49.99 + 119.67 − 95.98) = 3.60 / 73.68 = 4.88%
+Both arms must be measured over the SAME year. A 12-week plan billed 12 times spans
+156 weeks; a 4-week plan billed 12 times spans exactly 52. Inside one year the
+12-week plan bills 4 times.
+
+p* = E[2nd upsell] / (Upgrade + RecRev12(1yr) − RecRev4(1yr))
+   = 3.60 / (49.99 + 89.43 − 95.98) = 3.60 / 43.44 = 8.29%
 ```
 
-Each upgrade **adds ~$73.68** (the $49.99 surcharge + the richer 12-week recurring stream) and **cannibalises only $3.60** (the expected second upsell).
+Inside one year the recurring delta is **negative** (−$6.55): a 12-week subscriber bills four times against the 4-week plan's twelve. So the upgrade is a **cash-forward trade** — $49.99 today against slightly less recurring this year, for a subscriber on a lower-churn plan. It cannibalises **$3.60**.
 
-| Upgrade take-rate | Test net LTV / 4-wk buyer | Lift vs control ($123.70) |
+| Upgrade take-rate | Test net LTV / 4-wk buyer | vs control ($123.70) |
 |---|---|---|
-| 0% (control) | $123.70 | — |
-| 5% | $123.77 | +0.1% |
-| 10% | $127.02 | +2.7% |
-| 20% | $133.50 | +7.9% |
-| 30% | $139.98 | +13.2% |
+| 0% | $120.53 | −$3.17 — the cost of the swap if nobody upgrades |
+| 8.3% | $123.70 | break-even |
+| 15% | $126.27 | +2.1% |
+| 30% | $132.00 | +6.7% |
 
-**Break-even ≈ 4.9%** (primary) to **≈ 8.3%** under the conservative 52-week horizon.
+**Break-even ≈ 8.3%** on a like-for-like one-year horizon.
 
 **Recommendation: run the test.** The downside is tiny and bounded (the $3.60 second upsell, test arm only); the upside is a permanent shift toward the highest-LTV plan. But because break-even is so low, the spreadsheet isn't the real question — the **live test must watch second-order effects the point-model ignores:** (a) does inserting an upgrade step depress overall checkout completion or first-upsell take? (b) do upgraded users **churn/refund faster** because they were pushed into a bigger commitment? Track early-period retention and refunds on upgraded cohorts, not just the Day-0 take-rate.

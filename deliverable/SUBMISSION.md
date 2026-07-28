@@ -20,7 +20,7 @@ Eleven tasks, in your order. The section number is where the full answer sits in
 | **C3** · What's next | **94.6% of people shown the popup clicked it** — appeal is fine, 68.5% were never shown it. So: make it the default path, shipped to 80% with a 20% hold-out — one change fixes the biggest loss *and* creates the control group v1 never had. Then the first 10 minutes, a hard gate, and route the user to their personal plan when the day closes — today it ends into nothing | 09 |
 | **C4** · Prototype | **The daily gate, built and live** — commit to a time, tomorrow locked behind a countdown, a guaranteed first win. https://alyasska.github.io/Nomad_Venture_Studio_TA_C4/ | 09 |
 | **D1** · LTV | Net **$60.42 / $123.70 / $162.15**, blended **$125.06**. ΣSₖ from the C-curve; net = gross × 0.88. Cross-checked against the observed plan mix ($126.90) | 10 |
-| **D2** · A/B break-even | **4.88%** (= $3.60 ÷ $73.68); **8.28%** on the conservative horizon. **Recommend running it** — downside capped at $3.60 per test-arm buyer | 11 |
+| **D2** · A/B break-even | **8.29%** on a like-for-like one-year horizon (= $3.60 ÷ $43.44). Applying all 12 supplied transitions to both plans gives 4.88%, but that hands the test arm 156 weeks and the control 52 — the same different-clocks error Part C is about. **Recommend running it** — downside capped at $3.60 per test-arm buyer | 11 |
 
 ---
 
@@ -158,7 +158,7 @@ brief's 10 / 70 / 20 — reweighting moves blended net LTV to **$126.90**, so th
 1-week plan is the weak point: lowest LTV, almost no upsell value, and **34.6% churn inside two weeks**.
 
 **D2 · A/B break-even** → [02-ab-test-model.md](../part-d-economics/02-ab-test-model.md) —
-plan-upgrade break-even at **≈4.9%** take-rate. **Recommend running it**; only the $3.60 second-upsell
+plan-upgrade break-even at **≈8.3%** take-rate, like-for-like. **Recommend running it**; only the $3.60 second-upsell
 is at risk. Watch upgraded-cohort churn and refunds in the live test.
 
 ---
