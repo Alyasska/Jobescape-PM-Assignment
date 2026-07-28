@@ -1,0 +1,761 @@
+<title>Challenge v2 — the daily gate</title>
+
+<style>
+  :root {
+    --paper:      #EDF0F3;
+    --backdrop:   #DFE4E9;
+    --surface:    #FFFFFF;
+    --surface-2:  #F5F7F9;
+    --ink:        #101822;
+    --ink-2:      #3D4C5C;
+    --ink-3:      #6B7A8A;
+    --line:       #D2DAE1;
+    --line-soft:  #E3E9ED;
+    --brass:      #8F6220;
+    --on-brass:   #FFFFFF;
+    --brass-ink:  #6E4A16;
+    --brass-wash: #F3EADB;
+    --done:       #2E6A5C;
+    --done-wash:  #E2EFEB;
+    --locked:     #7C8B9A;
+    --shadow:     0 1px 2px rgba(16,24,34,.06), 0 8px 24px rgba(16,24,34,.08);
+    --shadow-lg:  0 2px 6px rgba(16,24,34,.10), 0 24px 60px rgba(16,24,34,.18);
+
+    --ui: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:#131B24; --backdrop:#0B1116; --surface:#1A242F; --surface-2:#202C39;
+      --ink:#E8EDF2; --ink-2:#B4C1CD; --ink-3:#8595A5; --line:#2C3A48; --line-soft:#24303C;
+      --brass:#D3A052; --on-brass:#16202B; --brass-ink:#E9BE77; --brass-wash:#2A2317;
+      --done:#6FC0AC; --done-wash:#16292A; --locked:#6B7A89;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+      --shadow-lg:0 2px 6px rgba(0,0,0,.5), 0 24px 60px rgba(0,0,0,.55);
+    }
+  }
+  :root[data-theme="light"] {
+    --paper:#EDF0F3; --backdrop:#DFE4E9; --surface:#FFFFFF; --surface-2:#F5F7F9;
+    --ink:#101822; --ink-2:#3D4C5C; --ink-3:#6B7A8A; --line:#D2DAE1; --line-soft:#E3E9ED;
+    --brass:#8F6220; --on-brass:#FFFFFF; --brass-ink:#6E4A16; --brass-wash:#F3EADB;
+    --done:#2E6A5C; --done-wash:#E2EFEB; --locked:#7C8B9A;
+    --shadow:0 1px 2px rgba(16,24,34,.06), 0 8px 24px rgba(16,24,34,.08);
+    --shadow-lg:0 2px 6px rgba(16,24,34,.10), 0 24px 60px rgba(16,24,34,.18);
+  }
+  :root[data-theme="dark"] {
+    --paper:#131B24; --backdrop:#0B1116; --surface:#1A242F; --surface-2:#202C39;
+    --ink:#E8EDF2; --ink-2:#B4C1CD; --ink-3:#8595A5; --line:#2C3A48; --line-soft:#24303C;
+    --brass:#D3A052; --on-brass:#16202B; --brass-ink:#E9BE77; --brass-wash:#2A2317;
+    --done:#6FC0AC; --done-wash:#16292A; --locked:#6B7A89;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+    --shadow-lg:0 2px 6px rgba(0,0,0,.5), 0 24px 60px rgba(0,0,0,.55);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--backdrop);
+    color: var(--ink);
+    font-family: var(--ui);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .stage {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 32px 20px 64px;
+    display: grid;
+    grid-template-columns: minmax(0, 390px) minmax(0, 1fr);
+    gap: 44px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .stage { grid-template-columns: minmax(0, 1fr); gap: 28px; justify-items: center; }
+  }
+
+  /* ─────────────────────────── masthead ─────────────────────────── */
+  .masthead { grid-column: 1 / -1; }
+  .eyebrow {
+    font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--brass); font-weight: 650; margin: 0 0 10px;
+  }
+  .masthead h1 {
+    font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 4.4vw, 40px);
+    line-height: 1.15; margin: 0 0 12px; text-wrap: balance; letter-spacing: -.01em;
+  }
+  .masthead p { margin: 0; max-width: 62ch; color: var(--ink-2); font-size: 16.5px; }
+  .masthead strong { color: var(--ink); font-weight: 620; }
+
+  /* ─────────────────────────── phone ─────────────────────────── */
+  .phone-col { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 16px; }
+  @media (max-width: 900px) { .phone-col { position: static; width: 100%; max-width: 390px; } }
+
+  .phone {
+    width: 100%; max-width: 390px; height: 780px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 34px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    position: relative;
+    display: flex; flex-direction: column;
+  }
+
+  .statusbar {
+    flex: none; height: 40px; padding: 0 22px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--mono); font-size: 12px; color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .viewport { flex: 1; overflow-y: auto; overscroll-behavior: contain; }
+  .screen { display: none; padding: 4px 22px 32px; animation: rise .32s ease both; }
+  .screen.on { display: block; }
+  @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .screen { animation: none; }
+    *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  }
+
+  /* ─────────────────────────── type inside the app ─────────────────────────── */
+  .kicker {
+    font-size: 11.5px; letter-spacing: .13em; text-transform: uppercase;
+    color: var(--ink-3); font-weight: 650; margin: 0 0 6px;
+  }
+  .screen h2 {
+    font-family: var(--serif); font-weight: 400; font-size: 26px; line-height: 1.2;
+    margin: 0 0 10px; letter-spacing: -.005em; text-wrap: balance;
+  }
+  .lede { color: var(--ink-2); font-size: 16px; margin: 0 0 22px; }
+
+  /* ─────────────────────────── components ─────────────────────────── */
+  .card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 14px; padding: 18px; box-shadow: var(--shadow);
+  }
+
+  .goal-echo {
+    background: var(--surface-2); border: 1px solid var(--line-soft);
+    border-left: 3px solid var(--brass);
+    border-radius: 10px; padding: 14px 16px; margin-bottom: 22px;
+  }
+  .goal-echo .kicker { margin-bottom: 4px; }
+  .goal-echo p { margin: 0; font-family: var(--serif); font-size: 17.5px; line-height: 1.4; }
+
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 14px; font-weight: 620; margin-bottom: 8px; color: var(--ink-2); }
+  select, textarea {
+    width: 100%; font-family: var(--ui); font-size: 16.5px; color: var(--ink);
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 10px; padding: 13px 14px; line-height: 1.45;
+  }
+  textarea { resize: vertical; min-height: 92px; }
+  select:focus-visible, textarea:focus-visible, button:focus-visible {
+    outline: 2px solid var(--brass); outline-offset: 2px;
+  }
+
+  .btn {
+    display: block; width: 100%; text-align: center;
+    font-family: var(--ui); font-size: 17px; font-weight: 620;
+    padding: 15px 18px; border-radius: 11px; border: 1px solid transparent;
+    background: var(--brass); color: var(--on-brass); cursor: pointer;
+    transition: filter .15s ease, transform .05s ease;
+  }
+  .btn:hover { filter: brightness(1.07); }
+  .btn:active { transform: translateY(1px); }
+  .btn[disabled] { opacity: .45; cursor: not-allowed; }
+  .btn.ghost { background: transparent; color: var(--ink-2); border-color: var(--line); }
+  .btn.ghost:hover { background: var(--surface-2); filter: none; }
+  .btn-note { text-align: center; font-size: 13.5px; color: var(--ink-3); margin: 10px 0 0; }
+
+  /* the 7-day rail */
+  .rail { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .rail li {
+    display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 12px;
+    padding: 12px 14px; border-radius: 11px;
+    border: 1px solid var(--line-soft); background: var(--surface);
+  }
+  .rail .num {
+    font-family: var(--mono); font-size: 13px; font-weight: 600;
+    width: 34px; height: 34px; border-radius: 50%;
+    display: grid; place-items: center;
+    border: 1px solid var(--line); color: var(--ink-3);
+  }
+  .rail .skill { font-family: var(--serif); font-size: 16.5px; line-height: 1.3; }
+  .rail .state { font-size: 12px; letter-spacing: .07em; text-transform: uppercase; font-weight: 650; color: var(--locked); }
+
+  .rail li.done { background: var(--done-wash); border-color: transparent; }
+  .rail li.done .num { background: var(--done); border-color: var(--done); color: var(--paper); }
+  .rail li.done .state { color: var(--done); }
+  .rail li.done .skill { color: var(--ink-2); }
+
+  .rail li.today { background: var(--brass-wash); border-color: var(--brass); box-shadow: var(--shadow); }
+  .rail li.today .num { background: var(--brass); border-color: var(--brass); color: var(--on-brass); }
+  .rail li.today .state { color: var(--brass-ink); }
+
+  .rail li.locked { opacity: .62; }
+  .rail li.locked .skill { color: var(--ink-3); }
+
+  /* the gate — the hero of this prototype */
+  .gate {
+    border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px; margin-top: 22px;
+    background:
+      repeating-linear-gradient(135deg, transparent 0 9px, var(--line-soft) 9px 10px),
+      var(--surface-2);
+    text-align: center;
+  }
+  .gate .kicker { color: var(--locked); }
+  .gate .gate-skill { font-family: var(--serif); font-size: 20px; line-height: 1.25; margin: 2px 0 14px; text-wrap: balance; }
+  .gate .clock {
+    font-family: var(--mono); font-size: 30px; font-weight: 500;
+    font-variant-numeric: tabular-nums; color: var(--brass); display: block;
+  }
+  .gate .clock-label { font-size: 13px; color: var(--ink-3); margin: 4px 0 0; }
+
+  .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+  .stat { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 11px; padding: 13px 14px; }
+  .stat .v { font-family: var(--mono); font-size: 21px; font-variant-numeric: tabular-nums; }
+  .stat .l { font-size: 12.5px; color: var(--ink-3); margin-top: 2px; }
+
+  .chips { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+  .chip {
+    text-align: left; font-family: var(--serif); font-size: 16px; line-height: 1.35;
+    padding: 13px 15px; border-radius: 10px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  }
+  .chip:hover { border-color: var(--brass); }
+  .chip[aria-pressed="true"] { border-color: var(--brass); background: var(--brass-wash); }
+
+  .draft {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 12px; padding: 16px 18px; margin: 16px 0 12px;
+    font-family: var(--serif); font-size: 15.5px; line-height: 1.6; white-space: pre-wrap;
+  }
+  .draft:empty { display: none; }
+  .caret::after { content: "▍"; color: var(--brass); animation: blink 1s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .banner {
+    display: flex; gap: 12px; align-items: center;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 13px; padding: 14px 16px; box-shadow: var(--shadow);
+    margin-bottom: 22px;
+  }
+  .banner .dot { flex: none; width: 30px; height: 30px; border-radius: 8px; background: var(--brass); }
+  .banner .t { font-size: 14.5px; font-weight: 650; }
+  .banner .b { font-size: 14.5px; color: var(--ink-2); }
+  .banner .when { font-family: var(--mono); font-size: 12px; color: var(--ink-3); margin-left: auto; flex: none; }
+  .slide-in { animation: slidein .5s cubic-bezier(.2,.8,.3,1) both; }
+  @keyframes slidein { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+
+  .receipt {
+    background: var(--done-wash); border-radius: 13px;
+    padding: 18px; margin-bottom: 12px;
+  }
+  .receipt .kicker { color: var(--done); }
+  .receipt p { margin: 4px 0 0; font-family: var(--serif); font-size: 17px; line-height: 1.4; }
+
+  .saved-list { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+  .saved-list li {
+    font-size: 14.5px; color: var(--ink-2); padding: 10px 12px;
+    background: var(--surface-2); border-radius: 9px; border: 1px solid var(--line-soft);
+  }
+
+  /* ─────────────────────────── screen switcher ─────────────────────────── */
+  .switcher { display: flex; gap: 6px; flex-wrap: wrap; }
+  .switcher button {
+    flex: 1 1 0; min-width: 62px; font-family: var(--ui); font-size: 12.5px; font-weight: 600;
+    padding: 9px 6px; border-radius: 9px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink-3);
+  }
+  .switcher button[aria-current="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  /* ─────────────────────────── annotation rail ─────────────────────────── */
+  .notes { display: flex; flex-direction: column; gap: 20px; max-width: 560px; }
+  .note { border-left: 2px solid var(--line); padding: 2px 0 2px 20px; transition: border-color .25s ease; }
+  .note.active { border-left-color: var(--brass); }
+  .note h3 {
+    font-size: 12px; letter-spacing: .13em; text-transform: uppercase; font-weight: 650;
+    color: var(--ink-3); margin: 0 0 6px;
+  }
+  .note.active h3 { color: var(--brass); }
+  .note .claim { font-family: var(--serif); font-size: 19px; line-height: 1.35; margin: 0 0 8px; text-wrap: balance; }
+  .note p { margin: 0; color: var(--ink-2); font-size: 15.5px; }
+  .note .evidence {
+    display: inline-block; margin-top: 10px; font-family: var(--mono); font-size: 13px;
+    color: var(--brass-ink); background: var(--brass-wash);
+    padding: 4px 9px; border-radius: 6px; line-height: 1.5;
+  }
+
+  .footnote {
+    grid-column: 1 / -1; margin-top: 36px; padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 14.5px; color: var(--ink-3); max-width: 76ch;
+  }
+  .footnote code {
+    font-family: var(--mono); font-size: 13px; background: var(--surface-2);
+    padding: 2px 6px; border-radius: 5px; color: var(--ink-2);
+  }
+</style>
+
+<div class="stage">
+
+  <header class="masthead">
+    <p class="eyebrow">Jobescape · Challenge v2 · working prototype</p>
+    <h1>The daily gate — the mechanic v1 never shipped</h1>
+    <p>
+      Challenge v1 had no way to hold a day back, so <strong>27% of the people who finished the
+      “7-day” challenge finished it in one sitting</strong> and the habit it was built to create never
+      had a chance to form. This prototype makes one day one day. Move through the five screens
+      below; each note on the right ties the screen to the finding that produced it.
+    </p>
+  </header>
+
+  <div class="phone-col">
+    <div class="phone">
+      <div class="statusbar"><span id="sb-time">08:41</span><span>Jobescape</span></div>
+      <div class="viewport" id="viewport">
+
+        <!-- 1 ─────────────────────────── COMMIT -->
+        <section class="screen on" id="s-commit" aria-label="Set your daily time">
+          <p class="kicker">Before you start</p>
+          <h2>When will you take ten minutes?</h2>
+          <p class="lede">Seven days, one skill a day. Pick the time you’ll actually be at your desk —
+            we’ll open each day then, and not before.</p>
+
+          <div class="goal-echo">
+            <p class="kicker">You told us</p>
+            <p>“I want to work faster and stop feeling behind on AI.”</p>
+          </div>
+
+          <div class="field">
+            <label for="time">My ten minutes are at</label>
+            <select id="time">
+              <option value="7">7:00 am — before the day starts</option>
+              <option value="8" selected>8:30 am — with my first coffee</option>
+              <option value="12">12:30 pm — over lunch</option>
+              <option value="17">5:30 pm — end of the working day</option>
+              <option value="20">8:00 pm — after dinner</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="remind">Remind me by</label>
+            <select id="remind">
+              <option>Email</option>
+              <option selected>WhatsApp</option>
+              <option>Push notification</option>
+            </select>
+          </div>
+
+          <button class="btn" id="go-today">Start Day 1</button>
+          <p class="btn-note">You can move your time any day. Miss one and you pick it up tomorrow —
+            nothing resets.</p>
+        </section>
+
+        <!-- 2 ─────────────────────────── TODAY -->
+        <section class="screen" id="s-today" aria-label="Today">
+          <p class="kicker">Day <span id="today-num">1</span> of 7</p>
+          <h2 id="today-skill">Turn a long document into a one-page brief</h2>
+          <p class="lede">Ten minutes. You’ll use a document from your own desk, and you’ll leave with
+            the brief written.</p>
+
+          <div class="stat-row">
+            <div class="stat"><div class="v" id="stat-days">0</div><div class="l">days completed</div></div>
+            <div class="stat"><div class="v" id="stat-saved">0</div><div class="l">saved to your library</div></div>
+          </div>
+
+          <button class="btn" id="go-work">Open today’s task</button>
+          <p class="btn-note">Yesterday this took people nine minutes on average.</p>
+
+          <div class="gate">
+            <p class="kicker">Tomorrow — locked</p>
+            <p class="gate-skill" id="gate-skill">Ask a spreadsheet a question in plain English</p>
+            <span class="clock" id="gate-clock">00:00:00</span>
+            <p class="clock-label">opens at <span class="at-time">8:30 am</span></p>
+          </div>
+
+          <ul class="rail" id="rail"></ul>
+        </section>
+
+        <!-- 3 ─────────────────────────── THE WIN -->
+        <section class="screen" id="s-work" aria-label="Today’s task">
+          <p class="kicker">Day 1 · the task</p>
+          <h2>Which document is on your desk right now?</h2>
+          <p class="lede">Pick one, or type your own. You don’t have to write a prompt — that’s our job.</p>
+
+          <div class="chips" id="chips">
+            <button class="chip" aria-pressed="false">A 38-page vendor contract I have to summarise for my boss</button>
+            <button class="chip" aria-pressed="false">Last quarter’s board pack — I need the three things that changed</button>
+            <button class="chip" aria-pressed="false">A 60-page policy document I’m briefing my team on Monday</button>
+          </div>
+
+          <div class="field">
+            <label for="task">Or describe it in your own words</label>
+            <textarea id="task" placeholder="e.g. the annual report I have to present on Thursday"></textarea>
+          </div>
+
+          <button class="btn" id="draft-btn" disabled>Write my one-page brief</button>
+          <div class="draft" id="draft" aria-live="polite"></div>
+          <button class="btn ghost" id="save-btn" style="display:none">Save this to my library</button>
+        </section>
+
+        <!-- 4 ─────────────────────────── DONE -->
+        <section class="screen" id="s-done" aria-label="Done for today">
+          <p class="kicker">Day 1 · done</p>
+          <h2>That’s the brief. It took you nine minutes.</h2>
+
+          <div class="receipt">
+            <p class="kicker">What you can do now that you couldn’t this morning</p>
+            <p>Turn a document of any length into a one-page brief you’d be happy to put in front of
+              your boss.</p>
+          </div>
+
+          <div class="card">
+            <p class="kicker">In your library</p>
+            <ul class="saved-list" id="saved-list"></ul>
+          </div>
+
+          <div class="gate">
+            <p class="kicker">Tomorrow — Day 2</p>
+            <p class="gate-skill">Ask a spreadsheet a question in plain English</p>
+            <span class="clock" id="done-clock">00:00:00</span>
+            <p class="clock-label">no formulas, no syntax — we’ll bring the spreadsheet</p>
+          </div>
+
+          <button class="btn ghost" id="go-tomorrow" style="margin-top:20px">Skip ahead — show me tomorrow</button>
+          <p class="btn-note">In the real product this button doesn’t exist. That’s the point.</p>
+        </section>
+
+        <!-- 5 ─────────────────────────── TOMORROW -->
+        <section class="screen" id="s-tomorrow" aria-label="Tomorrow">
+          <div class="banner slide-in">
+            <div class="dot"></div>
+            <div>
+              <div class="t">Day 2 is open</div>
+              <div class="b">No formulas today. Ten minutes.</div>
+            </div>
+            <div class="when" id="notif-time">08:30</div>
+          </div>
+
+          <p class="kicker">Day 2 of 7</p>
+          <h2>Ask a spreadsheet a question in plain English</h2>
+          <p class="lede">Yesterday you turned 38 pages into one. Today you’ll get an answer out of a
+            spreadsheet without writing a single formula.</p>
+
+          <div class="stat-row">
+            <div class="stat"><div class="v">1</div><div class="l">day completed</div></div>
+            <div class="stat"><div class="v" id="stat-saved-2">1</div><div class="l">saved to your library</div></div>
+          </div>
+
+          <button class="btn" id="restart">Open today’s task</button>
+          <p class="btn-note">Day 3 opens tomorrow at <span class="at-time">8:30 am</span>.</p>
+
+          <ul class="rail" id="rail-2"></ul>
+        </section>
+
+      </div>
+    </div>
+
+    <nav class="switcher" id="switcher" aria-label="Prototype screens">
+      <button data-target="s-commit" aria-current="true">1 · Commit</button>
+      <button data-target="s-today" aria-current="false">2 · Today</button>
+      <button data-target="s-work" aria-current="false">3 · The win</button>
+      <button data-target="s-done" aria-current="false">4 · Done</button>
+      <button data-target="s-tomorrow" aria-current="false">5 · Tomorrow</button>
+    </nav>
+  </div>
+
+  <div class="notes" id="notes">
+    <article class="note active" data-for="s-commit">
+      <h3>Screen 1 · Commit</h3>
+      <p class="claim">There is currently no scheduled reason to come back.</p>
+      <p>v1 has no return trigger tied to a time the user chose, so the feature relies on people
+        spontaneously remembering it. Asking for ten minutes at a named hour is the cheapest possible
+        habit loop, and it makes the reminder honest rather than random.</p>
+      <span class="evidence">only 36.8% of starters who did a lesson ever came back for a second challenge day</span>
+    </article>
+
+    <article class="note" data-for="s-today">
+      <h3>Screen 2 · Today — the gate</h3>
+      <p class="claim">One day, and only one day, is available.</p>
+      <p>This is the hypothesis v1 never tested. Nothing in the shipped feature holds a day back, so
+        people either binge it or abandon it. The locked card is deliberately the most prominent thing
+        on the screen — the countdown is the product’s promise that tomorrow exists and has something
+        in it.</p>
+      <span class="evidence">27% of finishers completed the whole “7-day” challenge in a single day; 46% within two</span>
+    </article>
+
+    <article class="note" data-for="s-work">
+      <h3>Screen 3 · The win</h3>
+      <p class="claim">45% of the people who press Start complete zero lessons.</p>
+      <p>That is the highest-intent moment in the feature, and nearly half of it produces nothing. The
+        fix is to delete every step between pressing start and holding something useful: no blank
+        prompt box, no syntax, three pre-loaded real situations, a result inside ten minutes.</p>
+      <span class="evidence">499 starters completed zero lessons in a two-week window</span>
+    </article>
+
+    <article class="note" data-for="s-done">
+      <h3>Screen 4 · Done</h3>
+      <p class="claim">Half of the people who finish lesson 1 never open lesson 2.</p>
+      <p>The day closes on something the user keeps — a saved, reusable result — and names tomorrow as
+        a concrete work task rather than a topic. No confetti and no badge: the buyer here is a
+        professional in their fifties, and the reward that lands is competence, not celebration.</p>
+      <span class="evidence">lesson 1 → 2 survival 50.3% · challenge CSAT 3.25 vs 3.45 elsewhere</span>
+    </article>
+
+    <article class="note" data-for="s-tomorrow">
+      <h3>Screen 5 · Tomorrow</h3>
+      <p class="claim">The gate opening is the moment worth testing.</p>
+      <p>The one real risk in this design is that a locked day reads as being shut out of something you
+        paid for. This screen is what you put in front of five customers to find out: does the reminder
+        land as helpful, and does the unlock feel like an invitation or a restriction?</p>
+      <span class="evidence">the decision this prototype exists to de-risk</span>
+    </article>
+  </div>
+
+  <p class="footnote">
+    Task 4 deliverable for the Jobescape PM assignment. Every claim in the notes comes from
+    <code>01-analytics.md</code>, computed from BigQuery <code>sql_assessment</code> over 9,956 paying
+    subscribers. The AI drafting is simulated from a scripted string — a sandboxed page can’t reach a
+    model API — and the source marks where a live call to the Claude Messages API drops in.
+  </p>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var SKILLS = [
+    "Turn a long document into a one-page brief",
+    "Ask a spreadsheet a question in plain English",
+    "Write the email you’ve been putting off",
+    "Turn messy notes into decisions and owners",
+    "Build a five-slide update from one paragraph",
+    "Check a claim before you repeat it",
+    "One real task from your own desk, end to end"
+  ];
+
+  var state = { day: 1, saved: [], hour: 8, minute: 30 };
+  var $ = function (id) { return document.getElementById(id); };
+  var SCREENS = ["s-commit", "s-today", "s-work", "s-done", "s-tomorrow"];
+
+  /* ── screen routing ─────────────────────────────────────────── */
+  function show(id) {
+    SCREENS.forEach(function (s) { $(s).classList.toggle("on", s === id); });
+    Array.prototype.forEach.call($("switcher").children, function (b) {
+      b.setAttribute("aria-current", b.dataset.target === id ? "true" : "false");
+    });
+    Array.prototype.forEach.call($("notes").children, function (n) {
+      n.classList.toggle("active", n.dataset.for === id);
+    });
+    $("viewport").scrollTop = 0;
+  }
+  Array.prototype.forEach.call($("switcher").children, function (b) {
+    b.addEventListener("click", function () { show(b.dataset.target); });
+  });
+
+  /* ── the 7-day rail ─────────────────────────────────────────── */
+  function renderRail(el, currentDay) {
+    el.innerHTML = "";
+    SKILLS.forEach(function (skill, i) {
+      var n = i + 1;
+      var cls = n < currentDay ? "done" : (n === currentDay ? "today" : "locked");
+      var label = cls === "done" ? "Done" : (cls === "today" ? "Today" : "Day " + n);
+      var li = document.createElement("li");
+      li.className = cls;
+
+      var num = document.createElement("span");
+      num.className = "num";
+      num.textContent = cls === "done" ? "✓" : String(n);
+
+      var sk = document.createElement("span");
+      sk.className = "skill";
+      sk.textContent = skill;
+
+      var st = document.createElement("span");
+      st.className = "state";
+      st.textContent = label;
+
+      li.appendChild(num); li.appendChild(sk); li.appendChild(st);
+      el.appendChild(li);
+    });
+  }
+
+  /* ── the countdown to the next unlock ───────────────────────── */
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+
+  function nextUnlock() {
+    var now = new Date();
+    var t = new Date(now.getFullYear(), now.getMonth(), now.getDate(), state.hour, state.minute, 0, 0);
+    if (t <= now) { t.setDate(t.getDate() + 1); }
+    return t;
+  }
+
+  function tickClock() {
+    var ms = nextUnlock() - new Date();
+    if (ms < 0) { ms = 0; }
+    var s = Math.floor(ms / 1000);
+    var txt = pad(Math.floor(s / 3600)) + ":" + pad(Math.floor(s / 60) % 60) + ":" + pad(s % 60);
+    $("gate-clock").textContent = txt;
+    $("done-clock").textContent = txt;
+    var now = new Date();
+    $("sb-time").textContent = pad(now.getHours()) + ":" + pad(now.getMinutes());
+  }
+
+  function timeLabel() {
+    var suffix = state.hour < 12 ? "am" : "pm";
+    var h12 = state.hour % 12 === 0 ? 12 : state.hour % 12;
+    return h12 + ":" + pad(state.minute) + " " + suffix;
+  }
+
+  function applyTime() {
+    var label = timeLabel();
+    Array.prototype.forEach.call(document.querySelectorAll(".at-time"), function (e) {
+      e.textContent = label;
+    });
+    $("notif-time").textContent = pad(state.hour) + ":" + pad(state.minute);
+    tickClock();
+  }
+
+  $("time").addEventListener("change", function (e) {
+    var v = parseInt(e.target.value, 10);
+    state.hour = v;
+    state.minute = (v === 8 || v === 12 || v === 17) ? 30 : 0;
+    applyTime();
+  });
+
+  /* ── screen 1 → 2 ───────────────────────────────────────────── */
+  $("go-today").addEventListener("click", function () {
+    renderRail($("rail"), state.day);
+    $("today-num").textContent = String(state.day);
+    $("today-skill").textContent = SKILLS[state.day - 1];
+    $("gate-skill").textContent = SKILLS[state.day] || "You’ve finished the seven days";
+    show("s-today");
+  });
+
+  $("go-work").addEventListener("click", function () { show("s-work"); });
+
+  /* ── screen 3: pick a task, stream a draft ──────────────────── */
+  var chips = $("chips").querySelectorAll(".chip");
+
+  function refreshDraftBtn() {
+    var picked = !!$("chips").querySelector('[aria-pressed="true"]');
+    $("draft-btn").disabled = !picked && !$("task").value.trim();
+  }
+
+  Array.prototype.forEach.call(chips, function (c) {
+    c.addEventListener("click", function () {
+      var was = c.getAttribute("aria-pressed") === "true";
+      Array.prototype.forEach.call(chips, function (o) { o.setAttribute("aria-pressed", "false"); });
+      c.setAttribute("aria-pressed", was ? "false" : "true");
+      if (!was) { $("task").value = ""; }
+      refreshDraftBtn();
+    });
+  });
+
+  $("task").addEventListener("input", function () {
+    if ($("task").value.trim()) {
+      Array.prototype.forEach.call(chips, function (o) { o.setAttribute("aria-pressed", "false"); });
+    }
+    refreshDraftBtn();
+  });
+
+  /* In production this string is replaced by a streamed response from your backend,
+     which proxies the Claude Messages API:
+         const r = await fetch('/api/tutor', { method:'POST',
+           headers:{'content-type':'application/json'}, body: JSON.stringify({ task }) });
+     then pipe r.body into #draft exactly as the scripted stream below does. */
+  var DRAFT =
+    "ONE-PAGE BRIEF\n\n" +
+    "What this is\n" +
+    "A 38-page vendor agreement covering software licensing, support and renewal terms.\n\n" +
+    "The three things that matter\n" +
+    "1. The term auto-renews for 24 months unless you cancel 90 days out (clause 4.2).\n" +
+    "2. Price is fixed for year one, then rises with inflation plus 3% (clause 7.1).\n" +
+    "3. Liability is capped at 12 months of fees — below your usual floor (clause 11).\n\n" +
+    "What I would ask them to change\n" +
+    "Shorten the notice period to 30 days, and lift the liability cap. Everything else is standard.\n\n" +
+    "What you can skip\n" +
+    "Clauses 12–19 are boilerplate and match your last three agreements.";
+
+  var streaming = false;
+
+  $("draft-btn").addEventListener("click", function () {
+    if (streaming) { return; }
+    streaming = true;
+    $("draft-btn").disabled = true;
+    $("draft-btn").textContent = "Writing…";
+
+    var el = $("draft");
+    el.textContent = "";
+    el.classList.add("caret");
+
+    function finish() {
+      streaming = false;
+      el.classList.remove("caret");
+      $("draft-btn").textContent = "Write it again, shorter";
+      $("draft-btn").disabled = false;
+      $("save-btn").style.display = "block";
+    }
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.textContent = DRAFT;
+      finish();
+      return;
+    }
+
+    var i = 0;
+    var timer = setInterval(function () {
+      i += 3;
+      el.textContent = DRAFT.slice(0, i);
+      $("viewport").scrollTop = $("viewport").scrollHeight;
+      if (i >= DRAFT.length) { clearInterval(timer); finish(); }
+    }, 12);
+  });
+
+  /* ── screen 3 → 4 ───────────────────────────────────────────── */
+  $("save-btn").addEventListener("click", function () {
+    var chosen = $("chips").querySelector('[aria-pressed="true"]');
+    var name = $("task").value.trim() || (chosen ? chosen.textContent.trim() : "Your document");
+    state.saved.push(name);
+
+    $("stat-saved").textContent = String(state.saved.length);
+    $("stat-saved-2").textContent = String(state.saved.length);
+    $("stat-days").textContent = String(state.day);
+
+    var list = $("saved-list");
+    list.innerHTML = "";
+    state.saved.forEach(function (s) {
+      var li = document.createElement("li");
+      li.textContent = "One-page brief — " + (s.length > 46 ? s.slice(0, 46) + "…" : s);
+      list.appendChild(li);
+    });
+    show("s-done");
+  });
+
+  /* ── screen 4 → 5 ───────────────────────────────────────────── */
+  $("go-tomorrow").addEventListener("click", function () {
+    renderRail($("rail-2"), 2);
+    var b = document.querySelector("#s-tomorrow .banner");
+    b.classList.remove("slide-in");
+    void b.offsetWidth;
+    b.classList.add("slide-in");
+    show("s-tomorrow");
+  });
+
+  $("restart").addEventListener("click", function () { show("s-work"); });
+
+  /* ── boot ───────────────────────────────────────────────────── */
+  renderRail($("rail"), 1);
+  renderRail($("rail-2"), 2);
+  applyTime();
+  setInterval(tickClock, 1000);
+})();
+</script>

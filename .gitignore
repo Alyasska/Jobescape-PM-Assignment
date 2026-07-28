@@ -1,0 +1,42 @@
+# Secrets — never commit
+00-context/credentials.md
+*.key
+*.pem
+.env
+.env.*
+
+# Raw data exports (can be large / re-pullable)
+part-c-release-verdict/data/*.csv
+part-c-release-verdict/data/*.parquet
+part-c-release-verdict/data/*.json
+
+# Downloaded source materials (re-downloadable from Drive)
+part-a-audience/materials/ad-creatives/*
+part-a-audience/materials/quiz-funnel-answers/*
+!part-a-audience/materials/**/.gitkeep
+
+# Prototype build junk
+part-c-release-verdict/prototype/**/node_modules/
+part-c-release-verdict/prototype/**/dist/
+part-c-release-verdict/prototype/**/.next/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+.~lock.*#
+*.swp
+
+# Personal presenting aids — written to coach me, not to be read by a reviewer.
+# The reference contains delivery notes ("handle with care", "credit the PM openly") and the
+# audio is narration of my own submission back to me. Neither is a deliverable.
+presentation/audio/
+presentation/LISTEN.md
+presentation/SPEAKER-REPORT.md
+presentation/Jobescape-Presenter-Reference.pdf
+presentation/Jobescape-Presenter-Reference.html
+presentation/_superseded/

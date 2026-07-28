@@ -1,0 +1,62 @@
+quiz respondents in export        49,487
+answered >= 6 of 10 core questions  38,071  (76.9%)  <- the clustering sample
+
+== choosing k: within-cluster Hamming cost ==
+   k     cost   cost/user   improvement
+   2  193,760      5.089       —
+   3  182,252      4.787     5.9%
+   4  177,769      4.669     2.5%
+   5  171,100      4.494     3.8%
+   6  167,414      4.397     2.2%
+   7  164,227      4.314     1.9%
+   8  159,839      4.198     2.7%
+
+== k = 6 · cluster profiles (lift = share in cluster / share in population) ==
+
+  ── cluster 0  n = 10,810  (28.4%)
+      1.87x  62.3%  feels_ready      Somewhat ready — but I could be behind
+      1.63x  49.6%  learn_claude_for Growth - I love learning in-demand skills
+      1.61x  42.7%  benefit          Feel more confident with AI
+      1.52x  41.8%  age              45-54
+      1.33x  69.7%  ai_experience    Good, but i feel like i’m only scratching the surfac
+      1.28x  75.0%  gender           Male
+
+  ── cluster 3  n = 8,372  (22.0%)
+      2.22x  50.3%  feels_ready      A bit worried — things are changing quickly
+      2.17x  61.0%  career_fear      Falling behind as others move faster
+      1.87x  82.0%  used_claude      Not yet
+      1.59x  40.4%  field            Other
+      1.43x  48.9%  age              55+
+      1.29x  44.6%  benefit          Work faster
+
+  ── cluster 1  n = 7,953  (20.9%)
+      2.51x  45.7%  feels_ready      Yes - I’m confident in my skills
+      2.50x  60.6%  ai_experience    Great - AI already helps me a lot
+      1.71x  67.2%  gender           Female
+      1.66x  57.1%  benefit          Work faster
+      1.49x  80.1%  learn_claude_for Work tasks
+      1.39x  58.2%  career_fear      Nothing - I see AI as an opportunity, not a threat
+
+  ── cluster 2  n = 4,699  (12.3%)
+      2.59x  49.8%  age              35-44
+      1.49x  51.4%  benefit          Work faster
+      1.39x  75.0%  learn_claude_for Work tasks
+      1.31x  76.6%  gender           Male
+      1.28x  71.5%  used_claude      Yes
+      1.17x  49.6%  work_status      Full-time employee
+
+  ── cluster 4  n = 3,413  (9.0%)
+      3.11x  50.4%  benefit          Start my own business
+      2.56x  46.5%  feels_ready      Not really — I need new skills fast
+      2.16x  84.9%  gender           Female
+      2.07x  52.7%  field            Other
+      1.99x  60.8%  learn_claude_for Growth - I love learning in-demand skills
+      1.77x  48.6%  age              45-54
+
+  ── cluster 5  n = 2,824  (7.4%)
+      4.42x  49.6%  work_status      Exploring options
+      2.43x  44.2%  feels_ready      Not really — I need new skills fast
+      2.32x  27.2%  ai_experience    I haven’t really tried yet
+      2.22x  58.6%  benefit          Feel more confident with AI
+      2.04x  31.9%  learn_claude_for Personal use
+      2.01x  68.9%  age              55+

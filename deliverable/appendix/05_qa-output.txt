@@ -1,0 +1,121 @@
+== cohort shape ==
+  ok  subscribers in cohort                                      9956.0000  (doc: 9956)
+  ok  challenge-338 starters                                     1111.0000  (doc: 1111)
+  ok  non-takers                                                 8845.0000  (doc: 8845)
+  ok  all rows have a subscription                               9956.0000  (doc: 9956)
+
+== exposure ladder (Part C §1) ==
+  ok  saw popup                                                  3140.0000  (doc: 3140)
+  ok  saw popup %                                                0.3154  (doc: 0.315)
+  ok  clicked popup                                              2970.0000  (doc: 2970)
+  ok  viewed a challenge                                         2109.0000  (doc: 2109)
+  ok  started 338 %                                              0.1116  (doc: 0.112)
+  ok  never reached a surface                                    6716.0000  (doc: 6716)
+  ok  never reached a surface %                                  0.6746  (doc: 0.675)
+
+== inside the challenge (Part C §2) ==
+  ok  completed >= 1 lessons                                     612.0000  (doc: 612)
+  ok  completed >= 2 lessons                                     308.0000  (doc: 308)
+  ok  completed >= 3 lessons                                     158.0000  (doc: 158)
+  ok  completed >= 8 lessons                                     47.0000  (doc: 47)
+  ok  zero lessons %                                             0.4491  (doc: 0.449)
+  ok  lesson1->2 survival                                        0.5033  (doc: 0.503)
+  ok  completed the course                                       48.0000  (doc: 48)
+  ok  certificate                                                23.0000  (doc: 23)
+
+== tiers + headline table (Part C §4) ==
+  ok  HIGH n                                                     158.0000  (doc: 158)
+  ok  LOW n                                                      953.0000  (doc: 953)
+  ok  HIGH D1                                                    0.6962  (doc: 0.696)
+  ok  LOW D1                                                     0.5845  (doc: 0.584)
+  ok  DIDNT-TAKE D1                                              0.2174  (doc: 0.217)
+  ok  HIGH D3                                                    0.5696  (doc: 0.57)
+  ok  LOW D3                                                     0.3442  (doc: 0.344)
+  ok  DIDNT-TAKE D3                                              0.1001  (doc: 0.1)
+  ok  HIGH D7                                                    0.3910  (doc: 0.391)
+  ok  HIGH D7 denominator                                        133.0000  (doc: 133)
+  ok  LOW D7                                                     0.1805  (doc: 0.18)
+  ok  LOW D7 denominator                                         737.0000  (doc: 737)
+  ok  DIDNT-TAKE D7                                              0.0689  (doc: 0.069)
+  ok  DIDNT-TAKE D7 denominator                                  6345.0000  (doc: 6345)
+  ok  HIGH unsub                                                 0.1139  (doc: 0.114)
+  ok  LOW unsub                                                  0.1144  (doc: 0.114)
+  ok  DIDNT-TAKE unsub                                           0.1431  (doc: 0.143)
+
+== the decisive test (Part C §5 Test A) ==
+  ok  takers D1                                                  0.6004  (doc: 0.6)
+  ok  control n                                                  994.0000  (doc: 994)
+  ok  control D1 (the 59.6%)                                     0.5956  (doc: 0.596)
+  ok  D1 effect (pts)                                            0.0048  (doc: 0.005)
+  ok  D1 effect p-value                                          0.8231  (doc: 0.823)
+  ok  unsub effect (pts)                                         -0.0225  (doc: -0.023)
+  ok  unsub effect p-value                                       0.1189  (doc: 0.119)
+  ok  joined-never-started D1                                    0.6043  (doc: 0.604)
+  ok  viewed-never-joined D1                                     0.5929  (doc: 0.593)
+
+== immortal time + dose-response (Test B / C) ==
+  ok  start on day 0 %                                           0.2394  (doc: 0.239)
+  ok  day-0 dose effect (pts, negative)                          -0.0920  (doc: -0.092)
+  ok  day-0 dose p-value                                         0.0475  (doc: 0.048)
+
+== the mechanic (Test D) ==
+  ok  finished in 1 day                                          13.0000  (doc: 13)
+  ok  finished in 1 day %                                        0.2708  (doc: 0.271)
+  ok  finished in <=2 days %                                     0.4583  (doc: 0.458)
+  ok  returned for a 2nd challenge day %                         0.3676  (doc: 0.368)
+  ok  mean lessons per active challenge day                      1.4608  (doc: 1.46)
+
+== the metric that would have fooled the team (§6) ==
+  ok  takers D1, challenge-anchored                              0.3978  (doc: 0.398)
+  ok  cohort D1, first-app-day                                   0.2602  (doc: 0.26)
+
+== CSAT inversion (§8) ==
+  ok  CSAT never took                                            3.7373  (doc: 3.74)
+  ok  CSAT LOW                                                   3.5338  (doc: 3.53)
+  ok  CSAT HIGH                                                  3.3332  (doc: 3.33)
+  ok  CSAT finishers                                             3.1040  (doc: 3.1)
+  ok  CSAT of challenge-338 content                              3.2543  (doc: 3.25)
+  ok  same users, all content                                    3.4504  (doc: 3.45)
+
+== product-wide baselines (the thesis number) ==
+  ok  never completed a lesson anywhere %                        0.5021  (doc: 0.502)
+  ok  cohort unsubscribe %                                       0.1399  (doc: 0.14)
+
+== demographics (Part A + the PM's claim) ==
+  ok  male %                                                     0.5974  (doc: 0.597)
+  ok  female %                                                   0.3841  (doc: 0.384)
+  ok  aged 45+ (clean buckets) %                                 0.5776  (doc: 0.578)
+  ok  aged 45+ incl. legacy bucket %                             0.6012  (doc: 0.601)
+  ok  men 55+ count                                              2120.0000  (doc: 2120)
+  ok  men 55+ %                                                  0.2129  (doc: 0.213)
+  ok  men 35-54 %                                                0.2495  (doc: 0.249)
+  ok  unsub, age 18-24                                           0.3111  (doc: 0.311)
+  ok  unsub, age 25-34                                           0.1970  (doc: 0.197)
+  ok  unsub, age 35-44                                           0.1447  (doc: 0.145)
+  ok  unsub, age 45-54                                           0.0953  (doc: 0.095)
+  ok  unsub, age 55+                                             0.0969  (doc: 0.097)
+  ok  unsub, goal 'Work faster'                                  0.1095  (doc: 0.109)
+  ok  unsub, goal 'Feel more confident with AI'                  0.1074  (doc: 0.107)
+  ok  unsub, goal 'Get a quick side hustle'                      0.3723  (doc: 0.372)
+
+== plans (Part D validation) ==
+  ok  1Week share                                                0.1018  (doc: 0.102)
+  ok  4Week share incl. special                                  0.6459  (doc: 0.646)
+  ok  12Week share                                               0.2506  (doc: 0.251)
+  ok  1Week unsub                                                0.3462  (doc: 0.346)
+  ok  4Week unsub                                                0.1219  (doc: 0.122)
+  ok  12Week unsub                                               0.1058  (doc: 0.106)
+  ok  observed-mix blended net LTV                               126.8996  (doc: 126.9)
+
+== unsubscribe reasons (§8) ==
+  ok  total unsubscribed                                         1393.0000  (doc: 1393)
+  ok  payment/chargeback/dispute unsubs                          157.0000  (doc: 157)
+  ok  … as % of unsubs                                           0.1127  (doc: 0.113)
+
+== event catalogue (the 'not observable here' claim) ==
+  ok  event catalogue rows (file integrity)                      67.0000  (doc: 67)
+  ok  subscription_renewed events                                17.0000  (doc: 17)
+  ok  … per subscriber                                           0.0017  (doc: 0.0017)
+
+======================================================================
+All 91 checks passed — every documented number matches the data.

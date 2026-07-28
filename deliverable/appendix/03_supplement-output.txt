@@ -1,0 +1,103 @@
+
+================================================================================================
+§A · D1 AS THE TEAM DEFINED IT vs D1 ON A COMMON CLOCK
+================================================================================================
+  Brief: 'Target metric: D1 Retention (retention the day after the challenge started).'
+  That anchors takers on their challenge-start day. Non-takers have no such day, so the only
+  way to compare is a common clock (first app day). Both are shown — the difference is the
+  single biggest reason a naive read of this release looks better than it is.
+
+  measure                                                   n                    rate
+------------------------------------------------------------------------------------------------
+  TAKERS · D1 anchored on challenge-start (team defn)    1111     39.8% [36.9%–42.7%]
+  TAKERS · D1 anchored on first app day                  1111     60.0% [57.1%–62.9%]
+  NON-TAKERS · D1 anchored on first app day              8845     21.7% [20.9%–22.6%]
+  TAKERS · D3 anchored on challenge-start                 982     25.9% [23.2%–28.7%]
+  TAKERS · D7 anchored on challenge-start                 606     14.7% [12.1%–17.7%]
+
+================================================================================================
+§B · CSAT — does engaging with the product make people happier?
+================================================================================================
+  group                                      raters   mean CSAT     % 4-5     % 1-2
+------------------------------------------------------------------------------------------------
+  Completed the whole challenge                  48        3.10     37.5%     22.9%
+  HIGH  (3+ challenge lessons)                  158        3.33     38.6%     19.6%
+  LOW   (0-2 challenge lessons)                 845        3.53     53.0%     20.6%
+  Never took the challenge                     3740        3.74     59.8%     17.5%
+
+  CSAT given INSIDE challenge 338 specifically: n=583 raters, mean 3.25
+  … of 1111 starters, only 52.5% ever rated challenge content.
+  Same users' CSAT across ALL product content: 3.45
+
+================================================================================================
+§C · COMPLETION AND THE REFUND GATE
+================================================================================================
+  Part A found (from public reviews) that finishing the plan is the money-back gate.
+  If true, completion should predict MORE unsubscribing, not less. Test it.
+
+  group                                             n          unsubscribe rate
+------------------------------------------------------------------------------------------------
+  finished the challenge (all 8 lessons)           48        12.5% [5.9%–24.7%]
+  started but did not finish                     1063        11.4% [9.6%–13.4%]
+  never took it                                  8845       14.3% [13.6%–15.1%]
+
+  finishers vs non-finishers: diff +1.1%  z=+0.24  p=0.812  ns
+
+  of the finishers, those who binged it in <=2 days: n=22, unsub 22.7% [10.1%–43.4%]
+  of the finishers, those who spread it over 3+ days: n=26, unsub 3.8% [0.7%–18.9%]
+
+  took the certificate: n=23, unsub 13.0% [4.5%–32.1%]
+
+================================================================================================
+§D · THE 'SAW THE POPUP AND WALKED AWAY' GROUP — the worst cell in the dataset
+================================================================================================
+  group                                         n                  D1               unsub   avg lessons
+------------------------------------------------------------------------------------------------
+  saw popup, never opened the challenge      1132 44.9% [42.0%–47.8%] 25.5% [23.1%–28.1%]          3.71
+  never reached any challenge surface        6716 12.2% [11.4%–13.0%] 12.5% [11.7%–13.3%]          0.81
+  took the challenge                         1111 60.0% [57.1%–62.9%]  11.4% [9.7%–13.4%]          8.22
+
+  plan mix of 'saw popup, never opened': [('4Week', 703), ('12Week', 266), ('1Week', 144), ('4Week_special', 15)]
+  plan mix of the whole cohort         : [('4Week', 6341), ('12Week', 2495), ('1Week', 1014), ('4Week_special', 90)]
+
+  1-Week subscribers as share of 'saw popup, never opened': 12.7%  (cohort: 10.2%)
+
+================================================================================================
+§E · DATA-QUALITY FLAGS (things I would raise before anyone acts on this)
+================================================================================================
+  1. Two different quiz vocabularies are mixed in one cohort:
+     age      '45-54': n=2551  unsub=  9.5% D1= 26.9%
+     age      '55+': n=3200  unsub=  9.7% D1= 25.4%
+     age      '45+': n=235   unsub= 17.0% D1= 37.0%
+     status   'Full-time employee': n=3341  unsub= 11.8% D1= 27.1%
+     status   'Full-time worker': n=731   unsub= 28.5% D1= 28.5%
+     → 'Full-time worker' churns at 2.4x 'Full-time employee'. Same words, different funnel.
+       Either a different quiz version or different traffic. Cannot be pooled blindly.
+
+  2. THE BIG ONE — there is no hold-out group. Challenge starts run on every single day of
+     the window (2026-06-12 … 2026-06-25), so there is no pre/post and no control arm.
+     Every causal statement below is an observational correction, not an experiment.
+     This is the #1 thing to fix before the next release, not after it.
+
+  3. Observation window is only 14 days (2026-06-12 → 2026-06-25):
+     D7 is unobservable for 27.5% of the cohort;
+     unsubscribe is right-censored for everyone (a 4-week plan cannot even reach its
+     first renewal inside this window), so all unsubscribe rates here are FLOOR values.
+
+  4. The popup carries no challenge_id, so 'saw the popup' is exposure to ANY challenge,
+     not specifically 338. 338 is 99.7% of all starts, so the practical impact is small.
+
+================================================================================================
+§F · WHAT THE FEATURE IS WORTH TODAY
+================================================================================================
+  Reach:        1111/9956 = 11.2% of paying subscribers started it.
+  Activation:   612/1111 = 55.1% did even one lesson.
+  Completion:   48/1111 = 4.3% finished (0.48% of all subscribers).
+
+  Best causal estimate of the D1 effect (vs the exposure-matched control):
+    +0.5% percentage points, p=0.823 (ns) — statistically indistinguishable from zero.
+
+  Even if the effect were real and equal to the raw taker-vs-non-taker gap, at 11.2% reach
+  the cohort-level D1 impact would be at most 0.112 x the gap.
+    raw gap = +38.3%  →  cohort-level ceiling = +4.3% pts of overall D1.
+  Overall cohort D1 today: 26.0%

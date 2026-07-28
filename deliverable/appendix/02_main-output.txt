@@ -1,0 +1,320 @@
+
+====================================================================================================
+§1 · THE EXPOSURE LADDER — of every paying subscriber, who ever reaches the Challenge?
+====================================================================================================
+  step                                      n   % of cohort   step conv.
+----------------------------------------------------------------------------------------------------
+  Paying subscribers in the cohort       9956       100.0%            —
+  … saw the Challenge popup              3140        31.5%        31.5%
+  … clicked the popup                    2970        29.8%        94.6%
+  … viewed a Challenge page              2109        21.2%        71.0%
+  … joined Challenge 338                 1341        13.5%        63.6%
+  … STARTED Challenge 338                1111        11.2%        82.8%
+  … completed ≥1 challenge lesson         613         6.2%        55.2%
+  … completed ≥3 challenge lessons        158         1.6%        25.8%
+  … completed the whole challenge          48         0.5%        30.4%
+  … took the certificate                   23         0.2%        47.9%
+
+  Where the audience is lost (share of the whole paying cohort):
+    never reached any challenge surface :   6716  (67.5%)
+    reached a surface, never started 338:   2129  (21.4%)
+    started 338                        :   1111  (11.2%)
+
+====================================================================================================
+§2 · ENGAGEMENT TIERS — definition and calibration
+====================================================================================================
+  The Challenge ships 8 lessons (confirmed: every user flagged `course_completed`
+  has exactly 8 completions). So 'finished' = 8, and the day-3 content sits at lesson 3.
+
+  Tier rule (stated up front, applied everywhere below):
+    HIGH        started 338 AND completed >= 3 of the 8 lessons  (got past the Day-2 cliff)
+    LOW         started 338 AND completed <= 2 lessons
+    DIDN'T TAKE never started 338
+  The cut is at 3 because that is where the D7 curve steps (18% -> 39%) and it matches the
+  product's own claim ('one day = one skill' -> 3 lessons = a 3-day habit). §4 tests it for
+  robustness at every other threshold.
+
+  Challenge-lesson completion histogram (n=1111 starters):
+    0 lessons  499   44.9%  cum  44.9%  ███████████████████████████
+    1 lessons  304   27.4%  cum  72.3%  ████████████████
+    2 lessons  150   13.5%  cum  85.8%  ████████
+    3 lessons   53    4.8%  cum  90.5%  ███
+    4 lessons   25    2.3%  cum  92.8%  █
+    5 lessons   18    1.6%  cum  94.4%  █
+    6 lessons   10    0.9%  cum  95.3%  █
+    7 lessons    5    0.5%  cum  95.8%  
+    8 lessons   47    4.2%  cum 100.0%  ███
+
+  Lesson-by-lesson survival INSIDE the challenge (of the 1,111 who pressed start):
+    reached lesson          n   % of starters   survived prev. step
+----------------------------------------------------------------------------------------------------
+    completed >= 1         612           55.1%                 55.1%
+    completed >= 2         308           27.7%                 50.3%
+    completed >= 3         158           14.2%                 51.3%
+    completed >= 4         105            9.5%                 66.5%
+    completed >= 5          80            7.2%                 76.2%
+    completed >= 6          62            5.6%                 77.5%
+    completed >= 7          52            4.7%                 83.9%
+    completed >= 8          47            4.2%                 90.4%
+
+  Tier sizes:
+    HIGH (3+ lessons)         158  (1.6% of subscribers)
+    LOW (0–2 lessons)         953  (9.6% of subscribers)
+    DIDN'T TAKE IT           8845  (88.8% of subscribers)
+
+====================================================================================================
+§3 · THE HEADLINE COMPARISON  (retention anchored on each user's FIRST APP DAY for all three groups,
+     so the groups are on the same clock — see §4 for why this matters)
+====================================================================================================
+  metric                               HIGH (3+ lessons)         LOW (0–2 lessons)            DIDN'T TAKE IT
+----------------------------------------------------------------------------------------------------
+  D1 retention  ★TARGET              69.6% [62.1%–76.3%]       58.4% [55.3%–61.5%]       21.7% [20.9%–22.6%]
+  D3 retention                       57.0% [49.2%–64.4%]       34.4% [31.5%–37.5%]        10.0% [9.4%–10.6%]
+  D7 retention                       39.1% [31.2%–47.6%]       18.0% [15.4%–21.0%]          6.9% [6.3%–7.5%]
+  Unsubscribe rate                    11.4% [7.3%–17.3%]        11.4% [9.6%–13.6%]       14.3% [13.6%–15.1%]
+    (D7 denominator)                                 133                       737                      6345
+----------------------------------------------------------------------------------------------------
+  Avg lessons completed (all)                      19.28                      6.38                      1.81
+  Avg active days in product                        5.37                      3.46                      1.76
+  Avg CSAT (1–5)                                    3.33                      3.53                      3.74
+    (CSAT raters)                                    158                       845                      3740
+
+  Significance vs 'didn't take it':
+    HIGH (3+ lessons)    D1     diff  +47.9%  z=+14.27  p=0.00e+00  ***
+    HIGH (3+ lessons)    D3     diff  +47.0%  z=+18.83  p=0.00e+00  ***
+    HIGH (3+ lessons)    D7     diff  +32.2%  z=+13.92  p=0.00e+00  ***
+    HIGH (3+ lessons)    unsub  diff   -2.9%  z= -1.04  p=2.98e-01  ns
+    LOW (0–2 lessons)    D1     diff  +36.7%  z=+24.76  p=0.00e+00  ***
+    LOW (0–2 lessons)    D3     diff  +24.4%  z=+21.74  p=0.00e+00  ***
+    LOW (0–2 lessons)    D7     diff  +11.2%  z=+10.54  p=0.00e+00  ***
+    LOW (0–2 lessons)    unsub  diff   -2.9%  z= -2.43  p=1.52e-02  *
+
+====================================================================================================
+§4 · IS THE GAP CAUSAL? — three tests
+====================================================================================================
+  TEST A — EXPOSURE-MATCHED CONTROL.
+  'Didn't take it' is not one group: most of them were never offered the Challenge.
+  The fair control is people who DID reach the Challenge and chose not to engage.
+
+  exposure group                        n                    D1                    D3               unsub
+----------------------------------------------------------------------------------------------------
+  started 338 (takers)               1111   60.0% [57.1%–62.9%]   37.6% [34.8%–40.5%]  11.4% [9.7%–13.4%]
+  joined 338, never started           230   60.4% [54.0%–66.5%]   37.8% [31.8%–44.2%] 13.9% [10.0%–19.0%]
+  viewed 338, never joined            764   59.3% [55.8%–62.7%]   36.6% [33.3%–40.1%] 13.6% [11.4%–16.2%]
+  saw popup, never opened 338        1132   44.9% [42.0%–47.8%]   24.0% [21.6%–26.6%] 25.5% [23.1%–28.1%]
+  never reached a surface            6716   12.2% [11.4%–13.0%]      3.7% [3.2%–4.1%] 12.5% [11.7%–13.3%]
+
+  takers vs exposed-but-didn't-start:  D1 diff +0.5%  z=+0.22  p=0.823  ns
+  takers vs exposed-but-didn't-start:  unsub diff -2.3%  z=-1.56  p=0.119  ns
+
+
+  TEST B — IMMORTAL-TIME BIAS.
+  Only 24% of takers start on their first app day; the median taker starts on day +1.
+  To start on day +k you must already have survived to day k — so takers are pre-selected
+  survivors. The clean read is the 'day-0 starters' who had no survival head start.
+
+  taker start-day lag: day0 266 (24%), day+1 342 (31%), day+2 196 (18%), day+3 or later 307 (28%)
+
+  group                                         n                    D1                    D3
+----------------------------------------------------------------------------------------------------
+  takers who started on day 0                 266   39.1% [33.4%–45.1%]   22.6% [17.9%–27.9%]
+  all takers (any start day)                 1111   60.0% [57.1%–62.9%]   37.6% [34.8%–40.5%]
+  never took it                              8845   21.7% [20.9%–22.6%]    10.0% [9.4%–10.6%]
+
+  day-0 takers vs never-took:  D1 diff +17.4%  z=+6.71  p=2.00e-11  ***
+
+
+  TEST C — A NON-TAUTOLOGICAL DOSE-RESPONSE.
+  'More lessons -> better retention' is partly circular: doing lesson 3 on day 3 IS retention.
+  The clean version: among users whose challenge activity happened on ONE day only, does a
+  bigger DAY-0 dose predict coming back tomorrow? Nothing circular here.
+
+  n = 816 takers with all challenge activity on a single day
+  day-0 lessons         n             D1 next day               unsub
+----------------------------------------------------------------------------------------------------
+  0                   429     55.7% [51.0%–60.3%]  10.5% [7.9%–13.7%]
+  1                   248     54.4% [48.2%–60.5%]  12.5% [8.9%–17.2%]
+  2                    99     50.5% [40.8%–60.1%]  11.1% [6.3%–18.8%]
+  3                    21     33.3% [17.2%–54.6%] 23.8% [10.6%–45.1%]
+  4                     5       0.0% [0.0%–43.4%]  20.0% [3.6%–62.4%]
+  8                    13     53.8% [29.1%–76.8%] 38.5% [17.7%–64.5%]
+
+  >=2 vs <=1 day-0 lessons:  D1 diff -9.2%  z=-1.98  p=0.048  *
+
+
+  THRESHOLD ROBUSTNESS — the 'high' cut at every possible value:
+  high = >= k lessons     n high     D1 high      D1 low    D1 gap   unsub high   unsub low
+----------------------------------------------------------------------------------------------------
+  1                          612       61.4%       58.3%     +3.1%        12.7%        9.8%
+  2                          308       63.3%       58.8%     +4.5%        13.0%       10.8%
+  3                          158       69.6%       58.4%    +11.2%        11.4%       11.4%
+  4                          105       74.3%       58.5%    +15.7%        10.5%       11.5%
+  5                           80       78.8%       58.6%    +20.2%        10.0%       11.5%
+  6                           62       80.6%       58.8%    +21.8%        11.3%       11.4%
+  7                           52       76.9%       59.2%    +17.7%        11.5%       11.4%
+  8                           47       76.6%       59.3%    +17.3%        12.8%       11.4%
+
+====================================================================================================
+§5 · THE MECHANIC CHECK — is this actually a DAILY challenge?
+====================================================================================================
+  The hypothesis was 'one day = one skill builds a daily habit'. That only works if the
+  content is gated to one lesson per day. Test: how many lessons do people do per active day?
+
+  Users who completed the whole 8-lesson challenge: 48 (4.3% of starters, 0.48% of subscribers)
+
+  … and how many DAYS they took to do it:
+     1 day(s):  13  ( 27.1%)  cum  27.1%  ██████████████
+     2 day(s):   9  ( 18.8%)  cum  45.8%  █████████
+     3 day(s):   6  ( 12.5%)  cum  58.3%  ██████
+     4 day(s):   4  (  8.3%)  cum  66.7%  ████
+     5 day(s):   5  ( 10.4%)  cum  77.1%  █████
+     6 day(s):   2  (  4.2%)  cum  81.2%  ██
+     7 day(s):   3  (  6.2%)  cum  87.5%  ███
+     8 day(s):   3  (  6.2%)  cum  93.8%  ███
+     9 day(s):   2  (  4.2%)  cum  97.9%  ██
+    10 day(s):   1  (  2.1%)  cum 100.0%  █
+
+  → 13/48 (27%) finished the '7-day' challenge in ONE day.
+  → 22/48 (46%) finished it in two days or fewer.
+
+  Lessons completed per active challenge day (all takers who did >=1 lesson):
+    ~0 lessons/day:   63  (10.3%)
+    ~1 lessons/day:  357  (58.3%)
+    ~2 lessons/day:  136  (22.2%)
+    ~3 lessons/day:   28  (4.6%)
+    ~4 lessons/day:   14  (2.3%)
+    ~5 lessons/day:    1  (0.2%)
+    ~8 lessons/day:   13  (2.1%)
+
+  mean lessons per active challenge day: 1.46
+
+  Return behaviour: of takers who did >=1 lesson, how many ever came back for a 2nd challenge day?
+    225/612 = 36.8%
+
+====================================================================================================
+§6 · SEGMENTS
+====================================================================================================
+
+  ── AGE ──
+  segment                              subs  % cohort   take rate    D1 (all)     unsub   D1 takers   D1 non-tk
+----------------------------------------------------------------------------------------------------
+  55+                                  3200     32.1%       10.2%       25.4%      9.7%       60.9%       21.4%
+  45-54                                2551     25.6%       10.9%       26.9%      9.5%       62.1%       22.6%
+  35-44                                1887     19.0%       12.0%       27.8%     14.5%       66.1%       22.5%
+  25-34                                1117     11.2%       12.4%       24.4%     19.7%       54.0%       20.1%
+  18-24                                 913      9.2%       10.3%       21.9%     31.1%       44.7%       19.3%
+  45+                                   235      2.4%       20.0%       37.0%     17.0%       59.6%       31.4%
+  (unknown)                              53      0.5%        3.8%       13.2%     43.4%      100.0%        9.8%
+
+  ── GENDER ──
+  segment                              subs  % cohort   take rate    D1 (all)     unsub   D1 takers   D1 non-tk
+----------------------------------------------------------------------------------------------------
+  Male                                 5948     59.7%       11.3%       27.4%     12.5%       62.3%       23.0%
+  Female                               3824     38.4%       11.0%       23.8%     16.1%       56.2%       19.8%
+  I'd rather skip this one              122      1.2%       10.7%       31.1%      6.6%       69.2%       26.6%
+  (unknown)                              62      0.6%        4.8%       16.1%     38.7%       66.7%       13.6%
+
+  ── PLAN ──
+  segment                              subs  % cohort   take rate    D1 (all)     unsub   D1 takers   D1 non-tk
+----------------------------------------------------------------------------------------------------
+  4Week                                6341     63.7%       11.2%       26.5%     12.2%       60.5%       22.2%
+  12Week                               2495     25.1%       11.7%       26.4%     10.6%       61.3%       21.8%
+  1Week                                1014     10.2%        9.5%       20.9%     34.6%       51.0%       17.8%
+  4Week_special                          90      0.9%       12.2%       33.3%      3.3%       72.7%       27.8%
+
+  ── WORK STATUS ──
+  segment                              subs  % cohort   take rate    D1 (all)     unsub   D1 takers   D1 non-tk
+----------------------------------------------------------------------------------------------------
+  Full-time employee                   3341     33.6%       11.6%       27.1%     11.8%       61.2%       22.6%
+  Business owner                       1817     18.3%        8.8%       24.9%      9.4%       59.4%       21.5%
+  Freelancer / Self-employed           1487     14.9%       11.6%       26.1%     10.5%       63.0%       21.2%
+  Exploring options                     845      8.5%       12.3%       26.0%     18.6%       55.8%       21.9%
+  Full-time worker                      731      7.3%       12.3%       28.5%     28.5%       57.8%       24.3%
+  Between jobs / Career switcher        578      5.8%       13.1%       26.5%     13.8%       61.8%       21.1%
+  Student                               175      1.8%       14.9%       20.0%     37.1%       53.8%       14.1%
+
+  ── GOAL ──
+  segment                              subs  % cohort   take rate    D1 (all)     unsub   D1 takers   D1 non-tk
+----------------------------------------------------------------------------------------------------
+  Work faster                          3015     30.3%       10.0%       25.4%     10.9%       60.4%       21.5%
+  Feel more confident with AI          1992     20.0%       10.3%       25.5%     10.7%       62.6%       21.2%
+  Start my own business                1161     11.7%       14.4%       29.8%     10.9%       64.7%       23.9%
+  Earn more                             830      8.3%       11.3%       27.7%     10.7%       64.9%       23.0%
+  Get a promotion or a better job       636      6.4%       11.0%       25.0%     14.0%       50.0%       21.9%
+  Gain flexibility or work remotely     492      4.9%       13.4%       25.2%     27.4%       57.6%       20.2%
+  Get a quick side hustle               368      3.7%       10.6%       21.2%     37.2%       51.3%       17.6%
+  Unlock better income opportunitie     347      3.5%       15.3%       31.1%     25.4%       50.9%       27.6%
+  Increase work productivity            185      1.9%       10.8%       24.3%     10.3%       60.0%       20.0%
+
+  ── COUNTRY ──
+  segment                              subs  % cohort   take rate    D1 (all)     unsub   D1 takers   D1 non-tk
+----------------------------------------------------------------------------------------------------
+  US                                   3749     37.7%        9.8%       24.2%     12.5%       60.1%       20.3%
+  GB                                   1020     10.2%       10.0%       26.6%     12.6%       65.7%       22.2%
+  AU                                    691      6.9%       10.9%       25.6%     16.4%       60.0%       21.4%
+  CA                                    523      5.3%       12.4%       24.5%     16.3%       55.4%       20.1%
+  IT                                    375      3.8%       14.4%       26.1%     17.3%       53.7%       21.5%
+  AE                                    263      2.6%       14.8%       26.6%     12.2%       41.0%       24.1%
+  DE                                    255      2.6%       11.4%       26.7%     20.8%       79.3%       19.9%
+  FR                                    250      2.5%       10.4%       23.6%     14.4%       57.7%       19.6%
+  SG                                    243      2.4%       12.3%       30.5%     10.7%       56.7%       26.8%
+  ES                                    229      2.3%       14.8%       24.5%     14.0%       52.9%       19.5%
+  MX                                    202      2.0%        8.4%       29.2%      5.4%       88.2%       23.8%
+  CO                                    154      1.5%       10.4%       24.0%      9.1%       56.2%       20.3%
+
+  ── AGE × GENDER (the PM's claim: 'our main market is 40–50 y.o. men') ──
+  age               Male      Female    other/NA   row total    row %
+----------------------------------------------------------------------------------------------------
+  18-24              602         310           1         913     9.2%
+  25-34              613         493          11        1117    11.2%
+  35-44             1040         815          32        1887    19.0%
+  45-54             1444        1065          42        2551    25.6%
+  55+               2120        1035          45        3200    32.1%
+  TOTAL             5819        3718         131        9956
+                 58.4%       37.3%
+
+  Men aged 35–54            :   2484  (24.9% of paying subscribers)
+  Everyone aged 35–54       :   4438  (44.6%)
+  All men                   :   5819  (58.4%)
+  All women                 :   3718  (37.3%)
+  Aged 45+                  :   5751 (57.8%)
+
+====================================================================================================
+§7 · UNSUBSCRIBES
+====================================================================================================
+  total unsubscribed in cohort: 1393 / 9956 = 14.0%
+
+  plan                subs   unsub                  rate
+----------------------------------------------------------------------------------------------------
+  4Week               6341     773   12.2% [11.4%–13.0%]
+  12Week              2495     264    10.6% [9.4%–11.8%]
+  1Week               1014     351   34.6% [31.8%–37.6%]
+  4Week_special         90       3      3.3% [1.1%–9.3%]
+
+  tier                           n   unsub                  rate
+----------------------------------------------------------------------------------------------------
+  HIGH (3+ lessons)            158      18    11.4% [7.3%–17.3%]
+  LOW (0–2 lessons)            953     109    11.4% [9.6%–13.6%]
+  DIDN'T TAKE IT              8845    1266   14.3% [13.6%–15.1%]
+
+  Stated reason (only recorded for some unsubscribes):
+    (none recorded)                873  (62.7% of unsubs)
+    Support request                310  (22.3% of unsubs)
+    hard_decline                    84  (6.0% of unsubs)
+    account_deletion                31  (2.2% of unsubs)
+    Mastercard Alert                30  (2.2% of unsubs)
+    general                         22  (1.6% of unsubs)
+    dispute                         12  (0.9% of unsubs)
+    paypal_refund                   10  (0.7% of unsubs)
+    Visa CDRN                        7  (0.5% of unsubs)
+    fraud                            6  (0.4% of unsubs)
+    Merchanto visa                   4  (0.3% of unsubs)
+    payment_refunded                 3  (0.2% of unsubs)
+    fraud_reported                   1  (0.1% of unsubs)
+
+  → payment-failure / chargeback / refund-dispute reasons: 157 (11.3% of unsubs, 1.6% of the cohort)
+
+  Do challenge takers unsubscribe less? (raw, uncontrolled)
+    takers           127/1111   = 11.4% [9.7%–13.4%]
+    non-takers      1266/8845   = 14.3% [13.6%–15.1%]
+    diff -2.9%  z=-2.61  p=0.009  **
