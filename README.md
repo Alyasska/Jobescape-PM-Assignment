@@ -8,6 +8,13 @@ Workspace for Aliaskar's Product Manager take-home for **NVS / Jobescape**.
 - **Context for any AI session:** `CLAUDE.md` · new-chat onboarding: `00-context/HANDOFF.md`.
 - **Secrets:** `00-context/credentials.md` (gitignored) — never in a committed file.
 
+
+> **Note on the brief.** The assignment text itself is deliberately not published here — it is
+> Nomad Venture Studio's hiring material, not mine to put on the internet. The eleven tasks it
+> sets are named throughout, and the compiled answer is in
+> [`Aliaskar-Bekishev-PM-Assignment/`](Aliaskar-Bekishev-PM-Assignment/).
+
+
 ## The thesis
 
 > **Jobescape has built an excellent machine for selling a product it hasn't finished building.**
