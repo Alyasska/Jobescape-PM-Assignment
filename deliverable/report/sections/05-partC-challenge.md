@@ -61,7 +61,18 @@ Four tests, and the feature fails all four.
 
 **A red flag that changes the recommendation:** satisfaction falls as engagement rises — 3.74 (never took it) → 3.53 → 3.33 → **3.10 (finished it)**. Challenge content rates 3.25 while the same users rate the rest of the product 3.45.
 
-## C.3 — What's next: rebuild the mechanic, then run a real experiment
+## C.3 — What's next: fix the placement, then the mechanic
+
+**The reframe.** 94.6% of subscribers shown the Challenge popup clicked it; 68.5% were never shown
+it. Appeal is not the constraint — placement is. Making the Challenge the default post-onboarding
+path, shipped to 80% with a 20% hold-out, fixes the largest loss in the funnel and creates the
+control group v1 never had. Guardrail: Challenge CSAT is 3.25 against a 3.45 baseline, so watch
+refunds in the test arm.
+
+**And day 8 is a cliff.** Hand the user into their personal plan with the skill written into it,
+rather than ending the challenge into nothing. 75.7% already start a plan; nothing routes them there.
+
+### The original phasing, still valid for the mechanic itself
 
 **The reframe.** The Challenge is treated as a retention feature. It should be the product's **activation path** — because **50.2% of paying subscribers never complete a single lesson anywhere**, and a finite, sequenced, one-thing-at-a-time path is exactly the right shape of on-ramp for a 45+ professional.
 

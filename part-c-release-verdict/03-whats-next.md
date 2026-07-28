@@ -51,6 +51,46 @@ how they already work. That removes the only real objection to Phase 0.
 
 ---
 
+## The reframe on reach — and the one number that drives it
+
+Of the people who were **shown** the Challenge popup, **94.6% clicked it** (2,970 of 3,140). Appeal
+is not the problem. **68.5% of paying subscribers were never shown it at all.**
+
+| Step | n | of previous |
+|---|---|---|
+| Paying subscribers | 9,956 | |
+| Shown the popup | 3,140 | 31.5% |
+| **Clicked it** | 2,970 | **94.6%** |
+| Viewed a challenge page | 2,109 | 71.0% |
+| Pressed Start | 1,111 | 52.7% |
+| Completed ≥1 lesson | 613 | 55.2% |
+
+So the brief for engineering is not "make the Challenge more appealing" — that would be paying to
+fix something that already works. It is **placement**: make the Challenge the default path after
+onboarding instead of a popup a third of users ever receive.
+
+**And that single change is also how you get the hold-out.** Route 80% into it, hold 20% back.
+One decision fixes the largest loss in the funnel and finally makes the retention question
+answerable. Guardrail: Challenge CSAT is 3.25 against a 3.45 product baseline, so watch refunds and
+CSAT in the test arm and stop if they move.
+
+*This supersedes the earlier ordering, which put reach last. Reach is the biggest loss, the
+cheapest fix, and the vehicle for the experiment — it should be the test, not the finale.*
+
+## Day 8 is a cliff — hand the user into their plan
+
+The Challenge is finite by design, and nothing catches the user at the end of it. The certificate
+was meant to be that moment and 20 people downloaded it (0.2%).
+
+**Treat the Challenge as an on-ramp, not a destination.** When a day's skill is finished, hand the
+user straight into their personal plan with that skill written into it — "today's skill is now step
+3 of your plan; step 4 is the same thing on a harder document." 75.7% of subscribers already start
+a personal plan, so the destination exists; nothing routes them there.
+
+This is the cheapest retention mechanic in the document: it reuses the Challenge's one proven
+asset — a 94.6% click-through — as the entry point to the product's ongoing loop, instead of
+spending it on seven days and then dropping the user.
+
 ## Phase 0 — Make the next release measurable *(before any feature work)*
 
 The single most expensive thing about v1 is not that it didn't work; it's that **we can't prove whether it did.** 100% rollout, no hold-out, no pre/post. Everything in Task 1 is an observational reconstruction that only worked because a large "looked and left" group happened to exist as a natural control.
@@ -107,7 +147,7 @@ The single most expensive thing about v1 is not that it didn't work; it's that *
 
 | # | Change | Gate |
 |---|---|---|
-| 4.1 | Make the Challenge the **default post-onboarding path** for new subscribers rather than a popup | Ship only once challenge CSAT ≥ 3.45 (the product baseline) |
+| 4.1 | Make the Challenge the **default post-onboarding path** rather than a popup — see the reframe above; this moves to Phase 0/1 as the vehicle for the hold-out | Ship to 80% with a 20% hold-out; stop if refunds or CSAT move |
 | 4.2 | Retire the popup as the primary entry point | After 4.1 proves out in the hold-out test |
 
 ## What to remove

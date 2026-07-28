@@ -241,6 +241,61 @@
   .caret::after { content: "▍"; color: var(--brass); animation: blink 1s steps(2) infinite; }
   @keyframes blink { 50% { opacity: 0; } }
 
+
+  .spec { margin: 4px 0 14px; }
+  .spec-row { display: grid; grid-template-columns: 92px 1fr; gap: 12px; align-items: start;
+              padding: 11px 0; border-top: 1px solid var(--line-soft); }
+  .spec-row:first-child { border-top: 0; }
+  .spec-tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: .09em;
+              text-transform: uppercase; color: var(--brass-ink); background: var(--brass-wash);
+              border-radius: 5px; padding: 4px 7px; text-align: center; }
+  .spec-val { font-family: var(--serif); font-size: 15px; line-height: 1.45; color: var(--ink); }
+  .spec-row.pending .spec-tag { color: var(--ink-3); background: var(--surface-2); }
+  .spec-row.pending .spec-val { color: var(--ink-3); font-style: italic; }
+  .spec-caption { font-family: var(--mono); font-size: 11px; letter-spacing: .05em;
+                  color: var(--ink-3); margin: 0 0 10px; }
+  .check { background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+           padding: 15px 17px; margin: 16px 0; }
+  .check h3 { font-family: var(--serif); font-size: 16.5px; margin: 0 0 4px; }
+  .check p.q { font-family: var(--serif); font-size: 15px; color: var(--ink-2); margin: 0 0 12px; }
+  .opt { display: block; width: 100%; text-align: left; font-family: var(--serif); font-size: 15px;
+         padding: 11px 13px; margin-bottom: 8px; border-radius: 9px; cursor: pointer;
+         border: 1px solid var(--line); background: var(--surface-2); color: var(--ink); }
+  .opt:hover { border-color: var(--brass); }
+  .opt.right { border-color: var(--done); background: var(--done-wash); }
+  .opt.wrong { border-color: #B0473A; background: #F7E6E3; }
+  .check-fb { font-family: var(--serif); font-size: 14.5px; line-height: 1.5; color: var(--ink-2);
+              margin: 6px 0 0; }
+  .check-fb:empty { display: none; }
+  .evt-toggle { position: fixed; right: 14px; bottom: 14px; z-index: 40; font-family: var(--mono);
+                font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+                background: var(--ink); color: #fff; border: 0; border-radius: 999px;
+                padding: 9px 14px; cursor: pointer; box-shadow: var(--shadow); }
+  .evt-panel { position: fixed; right: 14px; bottom: 58px; z-index: 40; width: 320px;
+               max-height: 46vh; overflow: auto; background: var(--ink); color: #DCE4EC;
+               border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow-lg); display: none; }
+  .evt-panel.on { display: block; }
+  .evt-panel h4 { font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em;
+                  text-transform: uppercase; color: #8FA2B4; margin: 0 0 8px; font-weight: 500; }
+  .evt-panel li { font-family: var(--mono); font-size: 11px; line-height: 1.7; list-style: none; }
+  .evt-panel li b { color: #E8B96B; font-weight: 500; }
+  .evt-panel .none { color: #6E8095; font-style: italic; }
+
+
+  .plan { border: 1px solid var(--brass); background: var(--brass-wash); border-radius: 12px;
+          padding: 15px 17px; margin: 16px 0 4px; }
+  .plan .kicker { color: var(--brass-ink); }
+  .plan h3 { font-family: var(--serif); font-size: 17px; margin: 2px 0 10px; color: var(--ink); }
+  .plan-step { display: grid; grid-template-columns: 22px 1fr auto; gap: 10px; align-items: center;
+               padding: 9px 0; border-top: 1px solid rgba(143,98,32,.18); font-family: var(--serif);
+               font-size: 14.5px; }
+  .plan-step:first-of-type { border-top: 0; }
+  .plan-step .n { font-family: var(--mono); font-size: 11px; color: var(--brass-ink); }
+  .plan-step .tag { font-family: var(--mono); font-size: 10px; letter-spacing: .07em;
+                    text-transform: uppercase; color: var(--brass-ink); }
+  .plan-step.new { font-weight: 600; }
+  .plan-step.dim { color: var(--ink-3); }
+
   .banner {
     display: flex; gap: 12px; align-items: center;
     background: var(--surface); border: 1px solid var(--line);
@@ -401,8 +456,20 @@
             <textarea id="task" placeholder="e.g. the annual report I have to present on Thursday"></textarea>
           </div>
 
+          <p class="spec-caption">Your specification — built for you, block by block</p>
+          <div class="spec" id="spec"></div>
+
           <button class="btn" id="draft-btn" disabled>Write my one-page brief</button>
           <div class="draft" id="draft" aria-live="polite"></div>
+          <div class="check" id="check" style="display:none">
+            <h3>One question before you keep it</h3>
+            <p class="q">Why did the specified prompt beat &ldquo;write me a memo&rdquo;?</p>
+            <button class="opt" data-ok="0">Because it was longer</button>
+            <button class="opt" data-ok="1">Because it named the reader, the decision, and what success looks like</button>
+            <button class="opt" data-ok="0">Because it asked Claude to try again</button>
+            <p class="check-fb" id="check-fb"></p>
+          </div>
+
           <button class="btn ghost" id="save-btn" style="display:none">Save this to my library</button>
         </section>
 
@@ -421,6 +488,17 @@
             <p class="kicker">In your library</p>
             <ul class="saved-list" id="saved-list"></ul>
           </div>
+
+          <div class="plan" id="plan">
+            <p class="kicker">Your plan just changed</p>
+            <h3>Today&rsquo;s skill is now step 3 of your plan</h3>
+            <div class="plan-step dim"><span class="n">1</span><span>Write a prompt that specifies the reader</span><span class="tag">done</span></div>
+            <div class="plan-step dim"><span class="n">2</span><span>Get a first draft that is 90% there</span><span class="tag">done</span></div>
+            <div class="plan-step new"><span class="n">3</span><span>Turn a long document into a one-page brief</span><span class="tag">added today</span></div>
+            <div class="plan-step"><span class="n">4</span><span>Do it again on a harder document, with fewer hints</span><span class="tag">next</span></div>
+          </div>
+          <button class="btn" id="go-plan" style="margin-top:12px">Open my plan</button>
+          <p class="btn-note">The challenge is the on-ramp. The plan is where the habit lives.</p>
 
           <div class="gate">
             <p class="kicker">Tomorrow — Day 2</p>
@@ -463,7 +541,13 @@
       </div>
     </div>
 
-    <nav class="switcher" id="switcher" aria-label="Prototype screens">
+    <button class="evt-toggle" id="evt-toggle">Events</button>
+  <div class="evt-panel" id="evt-panel">
+    <h4>What v1 could not measure</h4>
+    <ul id="evt-list"><li class="none">Nothing yet — use the prototype.</li></ul>
+  </div>
+
+  <nav class="switcher" id="switcher" aria-label="Prototype screens">
       <button data-target="s-commit" aria-current="true">1 · Commit</button>
       <button data-target="s-today" aria-current="false">2 · Today</button>
       <button data-target="s-work" aria-current="false">3 · The win</button>
@@ -545,6 +629,74 @@
   var state = { day: 1, saved: [], hour: 8, minute: 30 };
   var $ = function (id) { return document.getElementById(id); };
   var SCREENS = ["s-commit", "s-today", "s-work", "s-done", "s-tomorrow"];
+
+  /* ── instrumentation ────────────────────────────────────────────
+     Phase 0: v1 shipped with no way to tell whether the gate was obeyed. Every action here
+     emits a named event, and the panel shows them firing. */
+  var EVENTS = [];
+  function track(name, props) {
+    EVENTS.push({ name: name, props: props || {} });
+    var ul = document.getElementById("evt-list");
+    if (!ul) return;
+    ul.innerHTML = "";
+    EVENTS.slice(-14).forEach(function (e) {
+      var li = document.createElement("li");
+      var extra = Object.keys(e.props).map(function (k) { return k + "=" + e.props[k]; }).join(" ");
+      li.innerHTML = "<b>" + e.name + "</b>" + (extra ? " " + extra : "");
+      ul.appendChild(li);
+    });
+  }
+
+  /* ── the specification, assembled from what the user already told us ──
+     The live Day-1 lesson teaches "front-load the specification" by asking you to paste a wall
+     of text into Claude in another tab. Here the same method is built in front of you and the
+     work stays in the product. */
+  var SPEC = [
+    ["Purpose",   function (d) { return "Get a decision from one page about: " + d; }],
+    ["Reader",    function ()  { return "Your manager — time-poor, skims the first line of each paragraph"; }],
+    ["Must have", function ()  { return "Recommendation first, then evidence, then what happens if we do nothing"; }],
+    ["Limits",    function ()  { return "One page. No filler opener. Flag anything you had to assume."; }],
+    ["Done when", function ()  { return "They can act on it without asking you a follow-up question"; }]
+  ];
+  function renderSpec(task) {
+    var el = document.getElementById("spec");
+    if (!el) return;
+    el.innerHTML = "";
+    SPEC.forEach(function (row, i) {
+      var d = document.createElement("div");
+      d.className = "spec-row" + (task ? "" : " pending");
+      d.innerHTML = '<span class="spec-tag">' + row[0] + '</span><span class="spec-val">' +
+                    (task ? row[1](task) : "waiting for your document") + "</span>";
+      el.appendChild(d);
+    });
+  }
+
+  /* ── the check that cannot be skipped ────────────────────────────
+     65% of practice questions in the live product are shown and never answered. Here the day
+     does not close until one is answered, so "completed" means something. */
+  var checkPassed = false;
+  function wireCheck() {
+    Array.prototype.forEach.call(document.querySelectorAll("#check .opt"), function (b) {
+      b.addEventListener("click", function () {
+        var ok = b.dataset.ok === "1";
+        Array.prototype.forEach.call(document.querySelectorAll("#check .opt"), function (o) {
+          o.classList.remove("right", "wrong");
+        });
+        b.classList.add(ok ? "right" : "wrong");
+        track(ok ? "practice_question_correct" : "practice_question_wrong", { day: state.day });
+        if (ok) {
+          checkPassed = true;
+          document.getElementById("check-fb").textContent =
+            "Right — that is the whole method. Everything else is editing.";
+          document.getElementById("save-btn").style.display = "";
+        } else {
+          document.getElementById("check-fb").textContent =
+            "Not quite — length is not the point. Try again.";
+        }
+      });
+    });
+  }
+
 
   /* ── screen routing ─────────────────────────────────────────── */
   function show(id) {
@@ -633,6 +785,7 @@
 
   /* ── screen 1 → 2 ───────────────────────────────────────────── */
   $("go-today").addEventListener("click", function () {
+    track("challenge_committed", { at: timeLabel() });
     renderRail($("rail"), state.day);
     $("today-num").textContent = String(state.day);
     $("today-skill").textContent = SKILLS[state.day - 1];
@@ -640,12 +793,20 @@
     show("s-today");
   });
 
-  $("go-work").addEventListener("click", function () { show("s-work"); });
+  $("go-work").addEventListener("click", function () {
+    track("lesson_started", { day: state.day });
+    show("s-work");
+  });
 
   /* ── screen 3: pick a task, stream a draft ──────────────────── */
   var chips = $("chips").querySelectorAll(".chip");
 
+  function currentTask() {
+    var chosen = document.querySelector('#chips .chip[aria-pressed="true"]');
+    return (chosen ? chosen.textContent : $("task").value).trim();
+  }
   function refreshDraftBtn() {
+    renderSpec(currentTask());
     var picked = !!$("chips").querySelector('[aria-pressed="true"]');
     $("draft-btn").disabled = !picked && !$("task").value.trim();
   }
@@ -698,11 +859,14 @@
     el.classList.add("caret");
 
     function finish() {
+      track("draft_generated", { day: state.day });
+      $("check").style.display = "";
       streaming = false;
       el.classList.remove("caret");
       $("draft-btn").textContent = "Write it again, shorter";
       $("draft-btn").disabled = false;
-      $("save-btn").style.display = "block";
+      /* the save button now waits for the check — a kept result should mean the person
+         actually did the thing, not that they watched it happen */
     }
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -722,6 +886,8 @@
 
   /* ── screen 3 → 4 ───────────────────────────────────────────── */
   $("save-btn").addEventListener("click", function () {
+    track("plan_handoff_shown", { day: state.day });
+    track("result_saved", { day: state.day, verified: checkPassed });
     var chosen = $("chips").querySelector('[aria-pressed="true"]');
     var name = $("task").value.trim() || (chosen ? chosen.textContent.trim() : "Your document");
     state.saved.push(name);
@@ -741,7 +907,14 @@
   });
 
   /* ── screen 4 → 5 ───────────────────────────────────────────── */
+  $("go-plan").addEventListener("click", function () {
+    track("plan_opened", { day: state.day, from: "challenge_day_complete" });
+    $("go-plan").textContent = "Your plan is open — Day 2 unlocks tonight";
+    $("go-plan").disabled = true;
+  });
+
   $("go-tomorrow").addEventListener("click", function () {
+    track("day_gate_bypassed", { day: state.day, via: "demo_skip" });
     renderRail($("rail-2"), 2);
     var b = document.querySelector("#s-tomorrow .banner");
     b.classList.remove("slide-in");
@@ -757,5 +930,10 @@
   renderRail($("rail-2"), 2);
   applyTime();
   setInterval(tickClock, 1000);
+  renderSpec("");
+  wireCheck();
+  document.getElementById("evt-toggle").addEventListener("click", function () {
+    document.getElementById("evt-panel").classList.toggle("on");
+  });
 })();
 </script>
