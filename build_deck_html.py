@@ -463,8 +463,8 @@ def _(i, n):
 @slide("C1 · What shipped", "diagram")
 def _(i, n):
     return (kicker("Part C · Task 1 — what actually shipped")
-            + col(h("The habit engine was never built.")
-                  + lede("Hypothesis: one day = one skill → daily return. The gate does not exist."
+            + col(h("The gate is a suggestion.")
+                  + lede("One day = one skill → daily return. The gate warns, then yields."
                          + ref("Feature = course_id 338 · 99.7% of all challenge starts",
                                "app_events · analysis/01_diagnostics.py Q5")), "1/13")
             + col(pbd(), "1/13"))
@@ -586,7 +586,7 @@ def _(i, n):
 @slide("C2 · Why", "chart")
 def _(i, n):
     return (kicker("Part C · Task 2 — why")
-            + col(h("No day gate. So no daily habit.")
+            + col(h("A soft gate is not a gate.")
                   + points([("27%", "finished in a single sitting"),
                             ("46%", "within two days"),
                             ("1.46", "mean lessons per active challenge day"),

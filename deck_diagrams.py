@@ -230,8 +230,8 @@ def pbd(w=1180):
     LEAF_Y = 212
     kids = [("Distribution", [("Homepage popup", "ships"), ("Skills catalogue", "ships")]),
             ("Content", [("8 lessons", "ships"), ("6 languages", "ships")]),
-            ("Habit engine", [("Streak counter", "shows 0"), ("Daily gate", "NOT BUILT"),
-                              ("Scheduled unlock", "NOT BUILT")]),
+            ("Habit engine", [("Streak counter", "shows 0"), ("Daily gate", "SOFT"),
+                              ("Day-gate logging", "NONE")]),
             ("Reward", [("Certificate", "0.2% take it")])]
     cw, gap = 262, 44
     x0 = (w - (len(kids) * cw + (len(kids) - 1) * gap)) / 2
@@ -258,7 +258,7 @@ def pbd(w=1180):
         prev_bottom = GRP_Y + GRP_H
         for j, (nm, st) in enumerate(items):
             top = LEAF_Y + j * (LEAF_H + LEAF_GAP)
-            missing = st == "NOT BUILT"
+            missing = st in ("SOFT", "NONE")
             # connector runs between boxes, never through one
             o.append(f'<line x1="{x+cw/2}" y1="{prev_bottom}" x2="{x+cw/2}" y2="{top}" '
                      f'stroke="{RULE}" stroke-width="1.5"/>')

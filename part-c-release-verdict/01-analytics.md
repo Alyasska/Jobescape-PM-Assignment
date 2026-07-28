@@ -11,7 +11,7 @@
 
 1. **Reach — 89% of paying subscribers never start the Challenge.** Two-thirds (67.5%) never see a challenge surface at all.
 2. **Effect — the target metric does not move.** Users who took the Challenge retain at **60.0% D1**; users who *looked at the Challenge and walked away* retain at **59.6%**. The difference is **+0.5 pts, p = 0.82.** The headline "+38 pt" gap is selection, not the feature.
-3. **Mechanic — it isn't a daily challenge.** Nothing gates the content to one lesson per day. **27% of finishers completed the whole "7-day" challenge in a single day**, 46% within two. The habit engine the hypothesis depends on was never actually shipped.
+3. **Mechanic — the gate is soft.** A warning appears if you start the next lesson early, then lets you through. Nothing enforces it and no event records it, so nothing gates the content to one lesson per day. **27% of finishers completed the whole "7-day" challenge in a single day**, 46% within two. The habit engine the hypothesis depends on was never actually shipped.
 
 A fourth finding is the reason "just show it to more people" is the wrong response: **satisfaction falls as engagement rises** — CSAT goes 3.74 (never took it) → 3.53 (low) → 3.33 (high) → **3.10 (finished it)**.
 

@@ -53,7 +53,7 @@ Four tests, and the feature fails all four.
 
 **A non-tautological dose-response.** Among takers whose entire challenge activity happened on one day, a bigger day-0 dose predicts **worse** next-day retention (−9.2 pts, p = 0.048). Not flat — negative.
 
-**The mechanic was never built.** The hypothesis needs daily gating. Nothing gates the content. **27% of the people who completed the "7-day" challenge did it in a single day; 46% within two.** Mean 1.46 lessons per active challenge day. Only 36.8% of starters who completed a lesson ever returned for a second challenge day.
+**The mechanic ships, but only as a suggestion.** Trying to open tomorrow's lesson today raises a dismissible warning — real day-logic, with no enforcement behind it and no event logging whether it was obeyed or clicked through. The hypothesis needs daily gating; a warning you can click past is not gating. **27% of the people who completed the "7-day" challenge did it in a single day; 46% within two.** Mean 1.46 lessons per active challenge day. Only 36.8% of starters who completed a lesson ever returned for a second challenge day.
 
 > **v1 did not fail the hypothesis — it never tested it.** What shipped was a short course with "7-Day" in the title.
 

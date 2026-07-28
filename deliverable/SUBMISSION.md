@@ -118,7 +118,7 @@ Two things make this more than a scorecard:
   different clocks and two different populations. Correcting for survivorship takes the gap from
   +38 pts to +17; matching on exposure takes it to +0.5.
 - **v1 never tested its own hypothesis.** The theory was "one day = one skill builds a daily habit,"
-  but nothing gates the content to one day. **27% of the people who finished the "7-day" challenge
+  but the gate is a dismissible warning, not a lock, and it is not logged. **27% of the people who finished the "7-day" challenge
   finished it in a single sitting**, 46% within two. You cannot fail a daily-habit test with a feature
   that has no days in it.
 
