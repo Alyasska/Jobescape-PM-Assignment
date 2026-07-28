@@ -603,10 +603,10 @@ def _(i, n):
     return (kicker("Part C · Task 3 — what's next")
             + col(h('It isn’t unappealing. It’s <span class="acc">hidden.</span>')
                   + table(["Phase", "Ships", "Metric it moves"], [
-                      ["0 · Placement", "Default path, 80% · 20% hold-out", "Fixes the biggest loss AND creates the control"],
+                      ["0 · Placement", "Open on the Challenge · 80/20 hold-out", "Biggest loss — and it gives you the control group"],
                       ["1 · First 10 min", "Why 45% get nothing · guaranteed win", "Unsub % 12h/24h — primary"],
-                      ["2 · Mechanic", "Harden the soft gate · wire the reminder", "Rebill 0→1 — primary"],
-                      ["3 · Hand-off", "End the day inside the personal plan", "D3, D7 — day 8 is a cliff"],
+                      ["2 · Mechanic", "Make the gate real · wire the reminder", "Rebill 0→1 — primary"],
+                      ["3 · Hand-off", "Day ends → send them to the plan", "D3, D7 — today it ends nowhere"],
                       ["4 · Quality", "Mine 3,601 exit-reason events", "CSAT — guardrail 3.45"],
                   ], accent_row=0), "1/13")
             + col(points([("Why placement first", "94.6% of people shown it clicked · 68.5% were never shown it"),
@@ -618,18 +618,17 @@ def _(i, n):
 @slide("C4 · Prototype", "evidence")
 def _(i, n):
     return (kicker("Part C · Task 4 — the prototype")
-            + col(h("The daily gate, built.")
-                  + points([("De-risks", "does a lock read as help, or as lockout?"),
-                            ("Their design system", "Jobescape's UI — not its streak"),
-                            ("Reward", "a result you keep, not a badge")])
+            + col(h("The loop, built.")
+                  + points([("The hook", "the Challenge is what greets you"),
+                            ("The grind", "the plan — open, no gate"),
+                            ("The missing arrow", "day ends → you land on the plan")])
                   + lede('<span class="mono-link acc">alyasska.github.io/'
                          'Nomad_Venture_Studio_TA_C4</span>'), "1/5")
             + col(picture("proto-phone-gate.png", 560, height=680), "6/9")
-            + col(points([("1 · Commit", "pick a daily time"),
-                          ("2 · Today", "the gate · live countdown"),
-                          ("3 · Win", "pre-loaded real task"),
-                          ("4 · Done", "a result you keep"),
-                          ("5 · Tomorrow", "reminder fires · gate opens")]), "10/13"))
+            + col(points([("1 · Enter", "the Challenge, served on arrival"),
+                          ("2 · Day 4", "checks you cannot skip past"),
+                          ("3 · Hand-off", "tomorrow locked → go to your plan"),
+                          ("4 · Plan", "the track with no gate")]), "10/13"))
 
 
 # ════════════════════════════════════════════ PART D

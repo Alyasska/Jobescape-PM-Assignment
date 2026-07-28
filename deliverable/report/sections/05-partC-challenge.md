@@ -69,8 +69,10 @@ path, shipped to 80% with a 20% hold-out, fixes the largest loss in the funnel a
 control group v1 never had. Guardrail: Challenge CSAT is 3.25 against a 3.45 baseline, so watch
 refunds in the test arm.
 
-**And day 8 is a cliff.** Hand the user into their personal plan with the skill written into it,
-rather than ending the challenge into nothing. 75.7% already start a plan; nothing routes them there.
+**And day 8 is a cliff.** The Challenge and the personal plan are independent tracks — the
+Challenge gated and daily, the plan open and self-paced — and nothing connects them. A challenge
+day ends with tomorrow locked and nowhere to go. Route the user to the plan instead; 75.7% already
+start one, and nothing sends them there.
 
 ### The original phasing, still valid for the mechanic itself
 

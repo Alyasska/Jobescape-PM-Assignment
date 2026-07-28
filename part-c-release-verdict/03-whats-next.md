@@ -77,19 +77,22 @@ CSAT in the test arm and stop if they move.
 *This supersedes the earlier ordering, which put reach last. Reach is the biggest loss, the
 cheapest fix, and the vehicle for the experiment — it should be the test, not the finale.*
 
-## Day 8 is a cliff — hand the user into their plan
+## Day 8 is a cliff — route the user to their plan
 
 The Challenge is finite by design, and nothing catches the user at the end of it. The certificate
 was meant to be that moment and 20 people downloaded it (0.2%).
 
-**Treat the Challenge as an on-ramp, not a destination.** When a day's skill is finished, hand the
-user straight into their personal plan with that skill written into it — "today's skill is now step
-3 of your plan; step 4 is the same thing on a harder document." 75.7% of subscribers already start
-a personal plan, so the destination exists; nothing routes them there.
+**Treat the Challenge as the hook, not the whole product.** The two tracks are independent and
+should stay that way: the Challenge is **gated and daily** — that is what builds the habit — while
+the personal plan is **open and self-paced**. What is missing is the arrow between them.
 
-This is the cheapest retention mechanic in the document: it reuses the Challenge's one proven
-asset — a 94.6% click-through — as the entry point to the product's ongoing loop, instead of
-spending it on seven days and then dropping the user.
+Today a challenge day ends into nothing. Tomorrow is locked, and there is nowhere to go. Route the
+user to their plan instead — the track with no gate — so the gate becomes a handover rather than a
+dead end. 75.7% of subscribers already start a personal plan, so the destination exists; nothing
+sends them there.
+
+That is also why the Challenge should be what greets a user on entry rather than a popup a third
+of them ever see.
 
 ## Phase 0 — Make the next release measurable *(before any feature work)*
 
